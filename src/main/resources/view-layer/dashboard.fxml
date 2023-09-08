@@ -6,7 +6,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.carhire.view.controller.DashBoardController">
    <children>
       <Button fx:id="categoryButton" alignment="BASELINE_LEFT" layoutX="15.0" layoutY="127.0" mnemonicParsing="false" onAction="#categoryButtonOnAction" prefHeight="54.0" prefWidth="153.0" text="Car Catogories">
@@ -59,7 +58,7 @@
             <Image url="@../Images/logo.png" />
          </image>
       </ImageView>
-      <Button alignment="BASELINE_LEFT" layoutX="15.0" layoutY="500.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="90.0" text="Logout">
+      <Button fx:id="logoutButton" alignment="BASELINE_LEFT" layoutX="15.0" layoutY="500.0" mnemonicParsing="false" onAction="#lgoutButtonOnAction" prefHeight="48.0" prefWidth="90.0" text="Logout">
          <graphic>
             <ImageView fx:id="logoutButton" fitHeight="29.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
