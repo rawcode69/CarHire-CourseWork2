@@ -1,32 +1,22 @@
 package lk.carhire.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
+
 
 public class UserDto {
 
-    Integer id;
-    String userName;
-    String passWord;
-    String role;
+    private Integer id;
+    private String userName;
+    private String passWord;
+    private String role;
+    private String firstName;
+    private String lastName;
 
-    String firstName;
-    String lastName;
 
-    public UserDto() {
-    }
-
-    public UserDto(Integer id, String userName, String passWord, String role, String firstName, String lastName) {
-        this.id = id;
-        this.userName = userName;
-        this.passWord = passWord;
-        this.role = role;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 }

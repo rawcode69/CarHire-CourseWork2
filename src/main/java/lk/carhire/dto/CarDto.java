@@ -12,12 +12,12 @@ import java.util.Date;
 
 public class CarDto {
 
-    Integer id;
-    String number;
-    String brand;
-    String model;
-    Integer year;
-    Double rate;
+    private Integer id;
+    private String number;
+    private String brand;
+    private String model;
+    private Integer year;
+    private Double rate;
 
     public CarDto() {
     }
