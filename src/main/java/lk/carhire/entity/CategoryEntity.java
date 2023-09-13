@@ -26,4 +26,8 @@ public class CategoryEntity {
     @OneToMany(mappedBy = "categoryEntity",targetEntity = CarEntity.class)
     List<CarEntity> carEntities;
 
+    public CategoryEntity(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

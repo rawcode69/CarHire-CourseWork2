@@ -1,6 +1,7 @@
 package lk.carhire.view.controller;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import lk.carhire.controller.CategoryController;
 import lk.carhire.dto.CategoryDto;
@@ -16,14 +17,21 @@ public class CategoryFormController {
 
     }
 
-    public void saveButtonOnAction(ActionEvent actionEvent) {
+    public void saveButtonOnAction(ActionEvent actionEvent) throws Exception {
         saveCategory();
     }
 
-    private void saveCategory() {
+    private void saveCategory() throws Exception {
 
-       CategoryDto category = new CategoryDto(Integer.valueOf(catIdText.getText()),catNameText.getText());
-       categoryController.saveCategory();
+       CategoryDto category = new CategoryDto();
+       category.setName(catNameText.getText());
+        try {
+            categoryController.saveCategory(category);
+            new Alert(Alert.AlertType.CONFIRMATION, "Category Saved");
+        }catch (Exception e){
+            new Alert(Alert.AlertType.ERROR,e.getMessage());
+        }
+
 
     }
 
