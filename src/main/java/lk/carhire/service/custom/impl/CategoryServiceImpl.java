@@ -12,7 +12,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Integer saveCategory(CategoryDto category) throws Exception {
         CategoryEntity categoryEntity = new CategoryEntity();
-        categoryEntity.setName(categoryEntity.getName());
+        categoryEntity.setName(category.getName());
         return categoryDao.add(categoryEntity);
     }
 }

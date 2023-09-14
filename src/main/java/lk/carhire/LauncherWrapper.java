@@ -1,5 +1,6 @@
 package lk.carhire;
 
+import lk.carhire.controller.CategoryController;
 import lk.carhire.entity.CategoryEntity;
 import lk.carhire.util.SessionFactoryConfiguration;
 import org.hibernate.Session;
@@ -13,5 +14,6 @@ public class LauncherWrapper {
         System.out.println(categoryEntity.toString());
 
        */
+
     }
 }

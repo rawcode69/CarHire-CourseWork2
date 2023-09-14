@@ -9,7 +9,8 @@ import lk.carhire.service.custom.CategoryService;
 public class CategoryController {
 
     CategoryService categoryService = (CategoryService) ServiceFactory.getInstance().getService(ServiceFactory.serviceType.CATEGORY);
-    public void saveCategory(CategoryDto category) throws Exception {
+    public Integer saveCategory(CategoryDto category) throws Exception {
         Integer id = categoryService.saveCategory(category);
+        return id;
     }
 }

@@ -12,13 +12,9 @@ public class CategoryFormController {
 
     public CategoryController categoryController;
 
-    public CategoryFormController() {
+    public void initialize() {
         categoryController = new CategoryController();
-
-    }
-
-    public void saveButtonOnAction(ActionEvent actionEvent) throws Exception {
-        saveCategory();
+        System.out.println("Category Form Initialized");
     }
 
     private void saveCategory() throws Exception {
@@ -26,14 +22,17 @@ public class CategoryFormController {
        CategoryDto category = new CategoryDto();
        category.setName(catNameText.getText());
         try {
-            categoryController.saveCategory(category);
-            new Alert(Alert.AlertType.CONFIRMATION, "Category Saved");
+            Integer id =  categoryController.saveCategory(category);
+            new Alert(Alert.AlertType.CONFIRMATION, "Category Saved").show();
+            System.out.println(id);
         }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR,e.getMessage());
+            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
 
 
     }
 
-
+    public void saveButtonAction(ActionEvent actionEvent) throws Exception {
+        saveCategory();
+    }
 }
