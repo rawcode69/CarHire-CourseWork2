@@ -4,6 +4,6 @@ import lk.carhire.dao.CrudDao;
 import lk.carhire.dao.SuperDao;
 import lk.carhire.entity.CategoryEntity;
 
-public interface CategoryDao extends CrudDao<CategoryEntity,String> {
+public interface CategoryDao extends CrudDao<CategoryEntity,Integer> {
 
 }

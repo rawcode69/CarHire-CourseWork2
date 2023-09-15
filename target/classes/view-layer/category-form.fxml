@@ -12,9 +12,10 @@
 
 <AnchorPane fx:id="categoryPane" prefHeight="442.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.carhire.view.controller.CategoryFormController">
    <children>
-      <TableView layoutX="14.0" layoutY="14.0" prefHeight="269.0" prefWidth="126.0">
+      <TableView fx:id="catTable" layoutX="14.0" layoutY="14.0" prefHeight="270.0" prefWidth="202.0">
         <columns>
-          <TableColumn prefWidth="123.20001220703125" text="Category" />
+          <TableColumn fx:id="colCatId" prefWidth="103.20004272460938" text="Category Id" />
+            <TableColumn fx:id="colCatName" prefWidth="95.20001220703125" text="Category Name" />
         </columns>
       </TableView>
       <Label fx:id="catIdLabel" layoutX="14.0" layoutY="303.0" prefHeight="34.0" prefWidth="82.0" text="Category Id: ">
@@ -27,10 +28,10 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="catIdText" layoutX="124.0" layoutY="308.0" prefHeight="26.0" prefWidth="114.0" />
+      <TextField fx:id="catIdText" layoutX="124.0" layoutY="308.0" onAction="#catTextOnAction" prefHeight="26.0" prefWidth="114.0" />
       <TextField fx:id="catNameText" layoutX="124.0" layoutY="346.0" prefHeight="26.0" prefWidth="236.0" />
-      <Button fx:id="searchButton" layoutX="249.0" layoutY="309.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="69.0" text="Search" />
-      <TableView layoutX="160.0" layoutY="14.0" prefHeight="270.0" prefWidth="627.0">
+      <Button fx:id="searchButton" layoutX="249.0" layoutY="309.0" mnemonicParsing="false" onAction="#searchButtonAction" prefHeight="26.0" prefWidth="69.0" text="Search" />
+      <TableView layoutX="249.0" layoutY="14.0" prefHeight="270.0" prefWidth="533.0">
         <columns>
           <TableColumn prefWidth="124.800048828125" text="C1" />
           <TableColumn prefWidth="120.7999267578125" text="C2" />
@@ -46,7 +47,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="updateButton" alignment="BASELINE_LEFT" layoutX="123.0" layoutY="384.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="98.0" text="Update">
+      <Button fx:id="updateButton" alignment="BASELINE_LEFT" layoutX="123.0" layoutY="384.0" mnemonicParsing="false" onAction="#updateButtonAction" prefHeight="46.0" prefWidth="98.0" text="Update">
          <graphic>
             <ImageView fitHeight="34.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -55,7 +56,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="deleteButton" alignment="BASELINE_LEFT" layoutX="234.0" layoutY="384.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="98.0" text="Delete">
+      <Button fx:id="deleteButton" alignment="BASELINE_LEFT" layoutX="234.0" layoutY="384.0" mnemonicParsing="false" onAction="#deleteButtonAction" prefHeight="46.0" prefWidth="98.0" text="Delete">
          <graphic>
             <ImageView fitHeight="34.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                <image>
