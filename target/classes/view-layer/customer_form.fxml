@@ -14,19 +14,19 @@
 <AnchorPane prefHeight="442.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.carhire.view.controller.CustomerFormController">
    <children>
       <Label layoutX="14.0" layoutY="18.0" prefHeight="20.0" prefWidth="82.0" text="Customer Id :" />
-      <TextField layoutX="101.0" layoutY="15.0" prefHeight="10.0" prefWidth="62.0" />
+      <TextField fx:id="custIdText" layoutX="101.0" layoutY="15.0" prefHeight="10.0" prefWidth="62.0" />
       <Label layoutX="14.0" layoutY="50.0" prefHeight="20.0" prefWidth="99.0" text="User Name : " />
-      <TextField layoutX="102.0" layoutY="47.0" prefHeight="26.0" prefWidth="141.0" />
-      <Button layoutX="168.0" layoutY="16.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" text="Search" />
+      <TextField fx:id="userNameText" layoutX="102.0" layoutY="47.0" prefHeight="26.0" prefWidth="141.0" />
+      <Button fx:id="searchButton" layoutX="168.0" layoutY="16.0" mnemonicParsing="false" onAction="#searchButtonAction" prefHeight="26.0" prefWidth="73.0" text="Search" />
       <Label layoutX="12.0" layoutY="97.0" prefHeight="20.0" prefWidth="74.0" text="First Name :" />
-      <TextField layoutX="89.0" layoutY="94.0" prefHeight="26.0" prefWidth="154.0" />
+      <TextField fx:id="firstNameText" layoutX="89.0" layoutY="94.0" prefHeight="26.0" prefWidth="154.0" />
       <Label layoutX="12.0" layoutY="127.0" prefHeight="20.0" prefWidth="74.0" text="Last  Name :" />
-      <TextField layoutX="89.0" layoutY="124.0" prefHeight="26.0" prefWidth="154.0" />
+      <TextField fx:id="lastNameText" layoutX="89.0" layoutY="124.0" prefHeight="26.0" prefWidth="154.0" />
       <Label layoutX="14.0" layoutY="182.0" prefHeight="20.0" prefWidth="74.0" text="Street :" />
-      <TextField layoutX="125.0" layoutY="179.0" prefHeight="10.0" prefWidth="118.0" />
+      <TextField fx:id="streetText" layoutX="125.0" layoutY="179.0" prefHeight="10.0" prefWidth="118.0" />
       <Label layoutX="14.0" layoutY="212.0" prefHeight="20.0" prefWidth="74.0" text="City:" />
-      <TextField layoutX="125.0" layoutY="210.0" prefHeight="10.0" prefWidth="118.0" />
-      <Button alignment="BASELINE_LEFT" layoutX="176.0" layoutY="398.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" text="Delete">
+      <TextField fx:id="cityText" layoutX="125.0" layoutY="210.0" prefHeight="10.0" prefWidth="118.0" />
+      <Button fx:id="deleteButton" alignment="BASELINE_LEFT" layoutX="176.0" layoutY="398.0" mnemonicParsing="false" onAction="#deleteButtonAction" prefHeight="35.0" prefWidth="74.0" text="Delete">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -35,10 +35,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <TableView layoutX="254.0" layoutY="15.0" prefHeight="418.0" prefWidth="536.0">
+      <TableView fx:id="custTable" layoutX="254.0" layoutY="15.0" prefHeight="418.0" prefWidth="536.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="clmCustId" prefWidth="75.20001220703125" text="Customer Id" />
+          <TableColumn fx:id="clmcustName" prefWidth="112.800048828125" text=" Name" />
+            <TableColumn fx:id="clmCustAddress" prefWidth="245.59991455078125" text="Address" />
+            <TableColumn fx:id="clmCustMobile" prefWidth="100.800048828125" text="Mobile" />
         </columns>
       </TableView>
       <Separator layoutX="8.0" layoutY="78.0" prefHeight="3.0" prefWidth="238.0" />
@@ -48,7 +50,7 @@
          </font>
       </Label>
       <Separator layoutX="7.0" layoutY="157.0" prefHeight="3.0" prefWidth="238.0" />
-      <Button alignment="BASELINE_LEFT" layoutX="87.0" layoutY="398.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="82.0" text="Update">
+      <Button fx:id="updateButton" alignment="BASELINE_LEFT" layoutX="87.0" layoutY="398.0" mnemonicParsing="false" onAction="#updateButtonAction" prefHeight="35.0" prefWidth="82.0" text="Update">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -57,7 +59,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button alignment="BASELINE_LEFT" layoutX="6.0" layoutY="398.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="74.0" text="Save">
+      <Button fx:id="saveButton" alignment="BASELINE_LEFT" layoutX="6.0" layoutY="398.0" mnemonicParsing="false" onAction="#saveButtonOnAction" prefHeight="35.0" prefWidth="74.0" text="Save">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -72,9 +74,9 @@
          </font>
       </Label>
       <Label layoutX="13.0" layoutY="245.0" prefHeight="20.0" prefWidth="74.0" text="District :" />
-      <TextField layoutX="125.0" layoutY="242.0" prefHeight="10.0" prefWidth="118.0" />
+      <TextField fx:id="districtText" layoutX="125.0" layoutY="242.0" prefHeight="10.0" prefWidth="118.0" />
       <Label layoutX="13.0" layoutY="277.0" prefHeight="20.0" prefWidth="74.0" text="Postal Code:" />
-      <TextField layoutX="125.0" layoutY="274.0" prefHeight="10.0" prefWidth="118.0" />
+      <TextField fx:id="postalCodeText" layoutX="125.0" layoutY="274.0" prefHeight="10.0" prefWidth="118.0" />
       <Separator layoutX="8.0" layoutY="305.0" prefHeight="3.0" prefWidth="238.0" />
       <Label layoutX="12.0" layoutY="310.0" prefHeight="18.0" prefWidth="62.0" text="Contact">
          <font>
@@ -82,8 +84,8 @@
          </font>
       </Label>
       <Label layoutX="13.0" layoutY="330.0" prefHeight="20.0" prefWidth="74.0" text="E - Mail :" />
-      <TextField layoutX="124.0" layoutY="327.0" prefHeight="10.0" prefWidth="118.0" />
+      <TextField fx:id="emailText" layoutX="124.0" layoutY="327.0" prefHeight="10.0" prefWidth="118.0" />
       <Label layoutX="13.0" layoutY="361.0" prefHeight="20.0" prefWidth="74.0" text="Mobile :" />
-      <TextField layoutX="124.0" layoutY="358.0" prefHeight="10.0" prefWidth="118.0" />
+      <TextField fx:id="mobileText" layoutX="124.0" layoutY="358.0" prefHeight="10.0" prefWidth="118.0" />
    </children>
 </AnchorPane>

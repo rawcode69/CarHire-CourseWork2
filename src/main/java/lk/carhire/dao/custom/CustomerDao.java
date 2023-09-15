@@ -4,5 +4,5 @@ import lk.carhire.dao.CrudDao;
 import lk.carhire.dao.SuperDao;
 import lk.carhire.entity.CustomerEntity;
 
-public interface CustomerDao extends CrudDao<CustomerEntity,String> {
+public interface CustomerDao extends CrudDao<CustomerEntity,Integer> {
 }

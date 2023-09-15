@@ -62,11 +62,11 @@ public class CategoryDaoImpl implements CategoryDao {
 
 
     @Override
-    public ArrayList<CategoryEntity> getAll() throws Exception {
+    public List<CategoryEntity> getAll() throws Exception {
 
         String hql = "FROM CategoryEntity";
         Query query =  session.createQuery(hql);
         List <CategoryEntity> categoryEntities = query.list();
-        return (ArrayList<CategoryEntity>) categoryEntities;
+        return categoryEntities;
     }
 }

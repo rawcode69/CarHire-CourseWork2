@@ -1,7 +1,7 @@
 package lk.carhire.entity;
 
 import jakarta.persistence.*;
-import lk.carhire.entity.embedded.Address;
+import lk.carhire.entity.embedded.CustomerAddress;
 import lk.carhire.entity.embedded.CustomerFullName;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,7 +31,7 @@ public class CustomerEntity {
 
     private CustomerFullName fullName;
 
-    private Address address;
+    private CustomerAddress address;
 
     @Column(name = "postalcode",length = 20,nullable = false)
     private String postalCode;
@@ -42,10 +42,6 @@ public class CustomerEntity {
             joinColumns = @JoinColumn(name = "CustId")
     )
     private List <String> mobiles;
-
-    @CreationTimestamp
-    @Column(name= "createDate", nullable = false)
-    private Date createDate;
 
     @OneToMany(mappedBy = "customerEntity",targetEntity = RentEntity.class)
     List<RentEntity> rentEntities;

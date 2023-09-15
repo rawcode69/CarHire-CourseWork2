@@ -1,6 +1,7 @@
 package lk.carhire.service;
 
 import lk.carhire.service.custom.impl.CategoryServiceImpl;
+import lk.carhire.service.custom.impl.CustomerServiceImpl;
 
 public class ServiceFactory {
 
@@ -19,11 +20,13 @@ public class ServiceFactory {
      switch (type){
          case CATEGORY:
              return new CategoryServiceImpl();
+         case CUSTOMER:
+             return new CustomerServiceImpl();
          default:return null;
      }
     }
 
     public enum serviceType{
-        CATEGORY
+        CATEGORY,CUSTOMER
     }
 }

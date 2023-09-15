@@ -2,32 +2,67 @@ package lk.carhire.dao.custom.impl;
 
 import lk.carhire.dao.custom.CustomerDao;
 import lk.carhire.entity.CustomerEntity;
+import lk.carhire.util.SessionFactoryConfiguration;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerDaoImpl implements CustomerDao {
+
+    Session session = SessionFactoryConfiguration.getInstance().getSession();
     @Override
     public Integer add(CustomerEntity customerEntity) throws Exception {
-        return null;
+
+        Transaction transaction = session.beginTransaction();
+        try {
+            Integer id = (Integer) session.save(customerEntity);
+            transaction.commit();
+            return id;
+        }catch (Exception e){
+            transaction.rollback();
+            return -1;
+        }
     }
 
     @Override
     public void update(CustomerEntity customerEntity) throws Exception {
-
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.update(customerEntity);
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+            throw e;
+        }
     }
 
     @Override
     public void delete(CustomerEntity customerEntity) throws Exception {
-
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.delete(customerEntity);
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+            throw e;
+        }
     }
 
     @Override
-    public CustomerEntity get(String s) throws Exception {
-        return null;
+    public CustomerEntity get(Integer id) throws Exception {
+        CustomerEntity customerEntity = session.get(CustomerEntity.class,id);
+        return customerEntity;
     }
 
+
     @Override
-    public ArrayList<CustomerEntity> getAll() throws Exception {
-        return null;
+    public List<CustomerEntity> getAll() throws Exception {
+        String hql = "FROM CustomerEntity";
+        Query query = session.createQuery(hql);
+        List <CustomerEntity> customerEntities =   query.list();
+        return customerEntities;
     }
 }

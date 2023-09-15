@@ -1,6 +1,7 @@
 package lk.carhire.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface CrudDao <T, ID> extends SuperDao{
 
@@ -11,5 +12,5 @@ public interface CrudDao <T, ID> extends SuperDao{
 
     public T get(ID id) throws Exception;
 
-    public ArrayList<T> getAll() throws Exception;
+    public List<T> getAll() throws Exception;
 }

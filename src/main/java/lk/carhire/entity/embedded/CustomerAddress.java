@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Embeddable
-public class Address {
+public class CustomerAddress {
 
     @Column(length = 100,nullable = false)
     private String street;
