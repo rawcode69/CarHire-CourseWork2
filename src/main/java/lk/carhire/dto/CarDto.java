@@ -1,14 +1,15 @@
 package lk.carhire.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
+
 
 public class CarDto {
 
@@ -18,17 +19,18 @@ public class CarDto {
     private String model;
     private Integer year;
     private Double rate;
+    private Integer catId;
 
-    public CarDto() {
-    }
 
-    public CarDto(Integer id, String number, String brand, String model, Integer year, Double rate) {
-        this.id = id;
+    public CarDto(String number, String brand, String model, Integer year, Double rate, Integer catId) {
         this.number = number;
         this.brand = brand;
         this.model = model;
         this.year = year;
         this.rate = rate;
+        this.catId = catId;
     }
+
+
 
 }

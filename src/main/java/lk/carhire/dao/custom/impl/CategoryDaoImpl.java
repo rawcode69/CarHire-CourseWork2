@@ -18,6 +18,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public Integer add(CategoryEntity categoryEntity) throws Exception {
+
         Transaction transaction = session.beginTransaction();
         try {
             Integer id = (Integer) session.save(categoryEntity);
@@ -57,6 +58,7 @@ public class CategoryDaoImpl implements CategoryDao {
     @Override
     public CategoryEntity get(Integer id) throws Exception {
         CategoryEntity categoryEntity = session.get(CategoryEntity.class,id);
+        session.close();
         return categoryEntity;
     }
 
