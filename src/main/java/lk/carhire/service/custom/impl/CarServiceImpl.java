@@ -8,6 +8,9 @@ import lk.carhire.entity.CarEntity;
 import lk.carhire.entity.CategoryEntity;
 import lk.carhire.service.custom.CarService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CarServiceImpl implements CarService {
 
     CarDao carDao = (CarDao) DaoFactory.getInstance().getDao(DaoFactory.DaoType.CAR);
@@ -78,5 +81,26 @@ public class CarServiceImpl implements CarService {
         carEntity.setIsRentable(true);
 
         carDao.delete(carEntity);
+    }
+
+    @Override
+    public List<CarDto> getAllCars() throws Exception {
+
+        List<CarEntity> carEntities = carDao.getAll();
+        List<CarDto> carDtos = new ArrayList<>();
+
+        for(CarEntity carEntity : carEntities){
+            CarDto carDto = new CarDto();
+            carDto.setId(carEntity.getId());
+            carDto.setNumber(carEntity.getNumber());
+            carDto.setIsRentable(carEntity.getIsRentable());
+            carDto.setRate(carEntity.getRate());
+            carDto.setYear(carEntity.getYear());
+            carDto.setBrand((carEntity.getBrand()));
+            carDto.setModel(carEntity.getModel());
+
+            carDtos.add(carDto);
+        }
+        return carDtos;
     }
 }

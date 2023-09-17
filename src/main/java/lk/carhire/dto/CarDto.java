@@ -20,6 +20,7 @@ public class CarDto {
     private Integer year;
     private Double rate;
     private Integer catId;
+    private Boolean isRentable;
 
 
     public CarDto(String number, String brand, String model, Integer year, Double rate, Integer catId) {

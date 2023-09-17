@@ -3,6 +3,8 @@ package lk.carhire.service.custom;
 import lk.carhire.dto.CarDto;
 import lk.carhire.service.SuperService;
 
+import java.util.List;
+
 public interface CarService extends SuperService {
     Integer saveCar(CarDto carDto) throws Exception;
 
@@ -11,4 +13,7 @@ public interface CarService extends SuperService {
     CarDto getCar(Integer id) throws Exception;
 
     void deleteCar(CarDto carDto) throws Exception;
+
+
+    List<CarDto> getAllCars() throws Exception;
 }

@@ -4,6 +4,8 @@ import lk.carhire.dto.CarDto;
 import lk.carhire.service.ServiceFactory;
 import lk.carhire.service.custom.CarService;
 
+import java.util.List;
+
 public class CarController {
 
     CarService carService = (CarService) ServiceFactory.getInstance().getService(ServiceFactory.serviceType.CAR);
@@ -22,5 +24,10 @@ public class CarController {
 
     public void deleteCar(CarDto carDto) throws Exception {
         carService.deleteCar(carDto);
+    }
+
+    public List<CarDto> getAllCars() throws Exception {
+        List<CarDto> carDto = carService.getAllCars();
+        return carDto;
     }
 }

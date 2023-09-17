@@ -18,13 +18,13 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public Integer add(CategoryEntity categoryEntity) throws Exception {
-
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
             Integer id = (Integer) session.save(categoryEntity);
             transaction.commit();
             return id;
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             return null;
         }
@@ -33,11 +33,12 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public void update(CategoryEntity categoryEntity) throws Exception {
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
             session.update(categoryEntity);
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             throw e;
         }
@@ -45,11 +46,12 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public void delete(CategoryEntity categoryEntity) throws Exception {
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
             session.delete(categoryEntity);
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             throw e;
         }
@@ -57,7 +59,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public CategoryEntity get(Integer id) throws Exception {
-        CategoryEntity categoryEntity = session.get(CategoryEntity.class,id);
+        CategoryEntity categoryEntity = session.get(CategoryEntity.class, id);
         session.close();
         return categoryEntity;
     }
@@ -67,8 +69,8 @@ public class CategoryDaoImpl implements CategoryDao {
     public List<CategoryEntity> getAll() throws Exception {
 
         String hql = "FROM CategoryEntity";
-        Query query =  session.createQuery(hql);
-        List <CategoryEntity> categoryEntities = query.list();
+        Query query = session.createQuery(hql);
+        List<CategoryEntity> categoryEntities = query.list();
         return categoryEntities;
     }
 }

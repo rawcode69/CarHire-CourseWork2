@@ -1,22 +1,68 @@
 package lk.carhire.view.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import lk.carhire.controller.CarController;
 import lk.carhire.dto.CarDto;
+import lk.carhire.dto.tm.CarTM;
+
+import java.util.List;
 
 public class CarsFormController {
 
 
     public TextField catIdText;
+    public TableColumn colId;
+    public TableColumn colNumber;
+    public TableColumn colBrand;
+    public TableColumn colModel;
+    public TableColumn colRate;
+    public TableColumn colToRent;
     CarController carController;
 
-    public void initialize() {
+    public void initialize() throws Exception {
         carController = new CarController();
+        setCellValueFactory();
+        List <CarDto> carDtos = getAllCars();
+        setTableData(carDtos);
+
+    }
+
+    private void setTableData(List<CarDto> carDtos) {
+        ObservableList <CarTM> obList = FXCollections.observableArrayList();
+
+        for(CarDto carDto : carDtos){
+            String toRent = null;
+            if(carDto.getIsRentable() == true){
+                toRent = "YES";
+            }else {
+                toRent = "NO";
+            }
+            CarTM carTM = new CarTM();
+            carTM.setId(String.valueOf(carDto.getId()));
+            carTM.setNumber(carDto.getNumber());
+            carTM.setBrand(carDto.getBrand());
+            carTM.setModel(carDto.getModel());
+            carTM.setRate(String.valueOf(carDto.getRate()));
+            carTM.setToRent(toRent);
+
+            obList.add(carTM);
+        }
+        carTable.setItems(obList);
+
+    }
+
+    private void setCellValueFactory() {
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
+        colBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
+        colModel.setCellValueFactory(new PropertyValueFactory<>("model"));
+        colRate.setCellValueFactory(new PropertyValueFactory<>("rate"));
+        colToRent.setCellValueFactory(new PropertyValueFactory<>("toRent"));
     }
 
 
@@ -32,6 +78,7 @@ public class CarsFormController {
     public TableView carTable;
     public Button saveButton;
 
+
     public void saveButtonOnAction(ActionEvent actionEvent) {
         saveCars();
 
@@ -41,16 +88,21 @@ public class CarsFormController {
         updateCars();
     }
 
+    private List<CarDto> getAllCars() throws Exception {
+        List <CarDto> carDtos =  carController.getAllCars();
+        return carDtos;
+    }
+
     private void updateCars() {
 
-        CarDto carDto = new CarDto(
-                Integer.valueOf(carIdText.getText()),
-                carNumberText.getText(),
-                carBrandText.getText(),
-                carModelText.getText(),
-                Integer.valueOf(yearText.getText()),
-                Double.valueOf(rateText.getText()),
-                Integer.valueOf(catIdText.getText()));
+        CarDto carDto = new CarDto();
+            carDto.setId(Integer.valueOf(carIdText.getText()));
+            carDto.setNumber(carNumberText.getText());
+            carDto.setBrand(carBrandText.getText());
+            carDto.setModel(carModelText.getText());
+            carDto.setYear(Integer.valueOf(yearText.getText()));
+            carDto.setRate(Double.valueOf(rateText.getText()));
+            carDto.setCatId(Integer.valueOf(catIdText.getText()));
         try {
             carController.updateCars(carDto);
             new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated").show();
@@ -112,14 +164,15 @@ public class CarsFormController {
 
     private void deleteCar() throws Exception {
 
-        CarDto carDto = new CarDto(
-                Integer.valueOf(carIdText.getText()),
-                carNumberText.getText(),
-                carBrandText.getText(),
-                carModelText.getText(),
-                Integer.valueOf(yearText.getText()),
-                Double.valueOf(rateText.getText()),
-                Integer.valueOf(catIdText.getText()));
+        CarDto carDto = new CarDto();
+        carDto.setId(Integer.valueOf(carIdText.getText()));
+        carDto.setNumber(carNumberText.getText());
+        carDto.setBrand(carBrandText.getText());
+        carDto.setModel(carModelText.getText());
+        carDto.setYear(Integer.valueOf(yearText.getText()));
+        carDto.setRate(Double.valueOf(rateText.getText()));
+        carDto.setCatId(Integer.valueOf(catIdText.getText()));
+
         try {
             carController.deleteCar(carDto);
             new Alert(Alert.AlertType.CONFIRMATION,"Car Deleted Successfully").show();

@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CarDaoImpl implements CarDao {
 
@@ -57,8 +58,11 @@ public class CarDaoImpl implements CarDao {
     public void delete(CarEntity carEntity) throws Exception {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
+        String sql = "DELETE FROM car WHERE CarId = :carID";
         try {
-            session.delete(carEntity);
+            Query query = session.createNativeQuery(sql);
+            query.setParameter("carID",carEntity.getId());
+            Integer deleted = query.executeUpdate();
             transaction.commit();
         }catch (Exception e){
             transaction.rollback();
@@ -73,7 +77,10 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public ArrayList<CarEntity> getAll() throws Exception {
-        return null;
+    public List<CarEntity> getAll() throws Exception {
+        String hql = "FROM CarEntity";
+        Query query = session.createQuery(hql);
+        List <CarEntity> carEntities = query.list();
+        return carEntities;
     }
 }
