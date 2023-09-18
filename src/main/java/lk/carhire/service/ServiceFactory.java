@@ -3,6 +3,7 @@ package lk.carhire.service;
 import lk.carhire.service.custom.impl.CarServiceImpl;
 import lk.carhire.service.custom.impl.CategoryServiceImpl;
 import lk.carhire.service.custom.impl.CustomerServiceImpl;
+import lk.carhire.service.custom.impl.UserServiceImpl;
 
 public class ServiceFactory {
 
@@ -25,11 +26,13 @@ public class ServiceFactory {
              return new CustomerServiceImpl();
          case CAR:
              return new CarServiceImpl();
+         case USER:
+             return new UserServiceImpl();
          default:return null;
      }
     }
 
     public enum serviceType{
-        CATEGORY,CUSTOMER,CAR
+        CATEGORY,CUSTOMER,CAR,USER
     }
 }

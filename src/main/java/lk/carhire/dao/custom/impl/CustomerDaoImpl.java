@@ -41,6 +41,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public void delete(CustomerEntity customerEntity) throws Exception {
+
         Transaction transaction = session.beginTransaction();
         try {
             session.delete(customerEntity);

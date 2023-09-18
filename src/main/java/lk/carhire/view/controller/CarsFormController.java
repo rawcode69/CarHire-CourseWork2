@@ -65,7 +65,6 @@ public class CarsFormController {
         colToRent.setCellValueFactory(new PropertyValueFactory<>("toRent"));
     }
 
-
     public TextField carIdText;
     public TextField carNumberText;
     public TextField carBrandText;
