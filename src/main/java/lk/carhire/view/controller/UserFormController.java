@@ -9,6 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lk.carhire.controller.UserController;
 import lk.carhire.dto.CustomerDto;
 import lk.carhire.dto.UserDto;
+import lk.carhire.dto.tm.CategoryTM;
 import lk.carhire.dto.tm.UserTM;
 
 import java.util.List;
@@ -31,9 +32,8 @@ public class UserFormController {
 
     public void initialize() throws Exception {
         userController = new UserController();
-        List <UserDto> userDtos = getAllUsers();
-        setCellValueFactory();
-        setTableData(userDtos);
+        loadTable();
+        tableListener();
     }
 
     private void setTableData(List<UserDto> userDtos) {
@@ -81,6 +81,7 @@ public class UserFormController {
             Integer id = userController.saveUser(userDto);
             new Alert(Alert.AlertType.CONFIRMATION, "User Saved Successfully").show();
             clearForm();
+            loadTable();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
@@ -110,6 +111,8 @@ public class UserFormController {
         try {
             userController.updateUser(userDto);
             new Alert(Alert.AlertType.CONFIRMATION, "User Saved Successfully").show();
+            clearForm();
+            loadTable();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
@@ -123,6 +126,11 @@ public class UserFormController {
 
         setForm(userDto);
 
+    }
+
+    public UserDto getUser(Integer id) throws Exception {
+        UserDto userDto = userController.getUser(id);
+        return userDto;
     }
 
     private void setForm(UserDto userDto) {
@@ -155,11 +163,51 @@ public class UserFormController {
         try {
             userController.deleteUser(userDto);
             new Alert(Alert.AlertType.CONFIRMATION,"User Deleted Successfully").show();
+            clearForm();
+            loadTable();
         }catch (Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
 
     }
+    private void loadTable() throws Exception {
+        List <UserDto> userDtos = getAllUsers();
+        setCellValueFactory();
+        setTableData(userDtos);
+    }
 
 
+    public void userIdAction(ActionEvent actionEvent) throws Exception {
+
+        getUser();
+    }
+
+
+    public void clearButtonAction(ActionEvent actionEvent) {
+        clearForm();
+    }
+    private void tableListener(){
+        userTable.getSelectionModel().selectedItemProperty().
+                addListener((observable, oldValue, newValue) -> {
+                    setData((UserTM) newValue);
+                });
+    }
+
+    private void setData(UserTM userTM) {
+
+        try {
+            Integer id = Integer.valueOf(userTM.getId()) ;
+            UserDto userDto = getUser(id);
+
+            idText.setText(String.valueOf(id));
+            firstNameText.setText(userDto.getFirstName());
+            lastNameText.setText(userDto.getLastName());
+            roleText.setText(userDto.getRole());
+            userNameText.setText(userDto.getUserName());
+            passwordText.setText(userDto.getPassWord());
+
+        }catch (Exception e){
+
+        }
+    }
 }

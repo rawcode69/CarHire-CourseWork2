@@ -29,7 +29,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void update(UserEntity userEntity) throws Exception {
-
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
         try {
@@ -43,7 +43,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void delete(UserEntity userEntity) throws Exception {
-
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
         try {
@@ -57,8 +57,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public UserEntity get(Integer id) throws Exception {
-
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
         UserEntity userEntity = session.get(UserEntity.class,id);
+        session.close();
         return userEntity;
     }
 

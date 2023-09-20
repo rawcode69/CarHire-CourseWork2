@@ -58,7 +58,9 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
+
     public CategoryEntity get(Integer id) throws Exception {
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
         CategoryEntity categoryEntity = session.get(CategoryEntity.class, id);
         session.close();
         return categoryEntity;

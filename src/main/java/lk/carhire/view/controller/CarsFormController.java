@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import lk.carhire.controller.CarController;
 import lk.carhire.dto.CarDto;
 import lk.carhire.dto.tm.CarTM;
+import lk.carhire.dto.tm.CategoryTM;
 
 import java.util.List;
 
@@ -26,9 +27,8 @@ public class CarsFormController {
 
     public void initialize() throws Exception {
         carController = new CarController();
-        setCellValueFactory();
-        List <CarDto> carDtos = getAllCars();
-        setTableData(carDtos);
+        loadTable();
+        tableListener();
 
     }
 
@@ -105,6 +105,8 @@ public class CarsFormController {
         try {
             carController.updateCars(carDto);
             new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated").show();
+            clearForm();
+            loadTable();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             System.out.println(e.getMessage());
@@ -125,6 +127,7 @@ public class CarsFormController {
             Integer id = carController.saveCar(carDto);
             System.out.println(id);
             clearForm();
+            loadTable();
             if (id > 0) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Car saved").show();
             } else {
@@ -143,6 +146,15 @@ public class CarsFormController {
         setForm(carDto);
     }
 
+    private CarDto getCar(Integer id) throws Exception{
+        try {
+            CarDto carDto = carController.getCar(id);
+            return carDto;
+        }catch (Exception e){
+            throw e;
+        }
+    }
+
     private void setForm(CarDto carDto) {
         carNumberText.setText(carDto.getNumber());
         carModelText.setText(carDto.getModel());
@@ -153,6 +165,7 @@ public class CarsFormController {
     }
 
     private void clearForm() {
+        carIdText.setText("");
         carNumberText.setText("");
         carModelText.setText("");
         carBrandText.setText("");
@@ -175,9 +188,45 @@ public class CarsFormController {
         try {
             carController.deleteCar(carDto);
             new Alert(Alert.AlertType.CONFIRMATION,"Car Deleted Successfully").show();
+            clearForm();
+            loadTable();
         }catch (Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
+
+    }
+
+    private void loadTable() throws Exception {
+        setCellValueFactory();
+        List <CarDto> carDtos = getAllCars();
+        setTableData(carDtos);
+    }
+
+    private void tableListener(){
+        carTable.getSelectionModel().selectedItemProperty().
+                addListener((observable, oldValue, newValue) -> {
+                    try {
+                        setData((CarTM) newValue);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+    }
+
+    private void setData(CarTM carTM) throws Exception {
+            try {
+                Integer carId = Integer.valueOf(carTM.getId());
+                CarDto carDto = getCar(carId);
+                carIdText.setText(carTM.getId());
+                carNumberText.setText(carDto.getNumber());
+                carBrandText.setText(carDto.getBrand());
+                carModelText.setText(carDto.getModel());
+                yearText.setText(String.valueOf(carDto.getYear()));
+                rateText.setText(String.valueOf(carDto.getRate()));
+                catIdText.setText(String.valueOf(carDto.getCatId()) );
+            }catch (Exception e){
+
+            }
 
     }
 
@@ -193,5 +242,7 @@ public class CarsFormController {
         deleteCar();
     }
 
-
+    public void clearButtonAction(ActionEvent actionEvent) {
+        clearForm();
+    }
 }

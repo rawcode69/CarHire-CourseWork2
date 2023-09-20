@@ -9,6 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import lk.carhire.controller.CustomerController;
 import lk.carhire.dto.CustomerDto;
+import lk.carhire.dto.tm.CarTM;
 import lk.carhire.dto.tm.CustomerTM;
 
 import java.util.List;
@@ -43,9 +44,8 @@ public class CustomerFormController {
     public void initialize(){
         customerController = new CustomerController();
        // System.out.println("Customer Form Initialized");
-        setCellValueFactory();
-        List<CustomerDto> customerDtos = getAllCustomers();
-        setTableData(customerDtos);
+        loadTables();
+        tableListener();
     }
 
     private void setTableData(List<CustomerDto> customerDtos) {
@@ -113,6 +113,8 @@ public class CustomerFormController {
         try {
             customerController.deleteCustomer(customerDto);
             new Alert(Alert.AlertType.CONFIRMATION,"Customer Deleted").show();
+            loadTables();
+            clearForm();
         }catch (Exception e){
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
@@ -133,8 +135,8 @@ public class CustomerFormController {
         try {
             Integer id = customerController.saveCustomer(customerDto);
             new Alert(Alert.AlertType.CONFIRMATION,"Customer Saved Successfully").show();
+            loadTables();
             clearForm();
-
         }catch (Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
@@ -150,6 +152,15 @@ public class CustomerFormController {
            setForm(customer);
         }catch (Exception e){
 
+        }
+    }
+
+    private CustomerDto getCustomer(Integer id) throws Exception {
+        try {
+            CustomerDto customerDto = customerController.getCustomer(id);
+            return customerDto;
+        }catch (Exception e){
+            throw e;
         }
     }
 
@@ -189,6 +200,7 @@ public class CustomerFormController {
         try {
             customerController.updateCustomer(customerDto);
             new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated").show();
+            loadTables();
             clearForm();
         }catch (Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
@@ -209,5 +221,54 @@ public class CustomerFormController {
     }
 
 
+    public void custIdTextAction(ActionEvent actionEvent) {
+        Integer id = Integer.valueOf(custIdText.getText());
 
+        try {
+            CustomerDto customer =  customerController.getCustomer(id);
+            setForm(customer);
+        }catch (Exception e){
+
+        }
+    }
+
+    private void loadTables(){
+        setCellValueFactory();
+        List<CustomerDto> customerDtos = getAllCustomers();
+        setTableData(customerDtos);
+    }
+
+    private void tableListener(){
+        custTable.getSelectionModel().selectedItemProperty().
+                addListener((observable, oldValue, newValue) -> {
+                    try {
+                        setData((CustomerTM) newValue);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+    }
+
+    private void setData(CustomerTM customerTM) throws Exception {
+
+
+        try {
+
+            Integer id = Integer.valueOf(customerTM.getId());
+            CustomerDto customerDto = getCustomer(id);
+            custIdText.setText(String.valueOf(id) );
+            userNameText.setText(customerDto.getUserName());
+            firstNameText.setText(customerDto.getFirstName());
+            lastNameText.setText(customerDto.getLastName());
+            streetText.setText(customerDto.getStreet());
+            cityText.setText(customerDto.getCity());
+            districtText.setText(customerDto.getDistrict());
+            postalCodeText.setText(customerDto.getPostalCode());
+            emailText.setText(customerDto.getEmail());
+            mobileText.setText(customerDto.getMobile());
+        }catch (Exception e){
+
+        }
+
+    }
 }

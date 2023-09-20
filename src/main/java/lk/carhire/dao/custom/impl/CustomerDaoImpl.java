@@ -15,7 +15,7 @@ public class CustomerDaoImpl implements CustomerDao {
     Session session = SessionFactoryConfiguration.getInstance().getSession();
     @Override
     public Integer add(CustomerEntity customerEntity) throws Exception {
-
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
             Integer id = (Integer) session.save(customerEntity);
@@ -29,6 +29,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public void update(CustomerEntity customerEntity) throws Exception {
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
             session.update(customerEntity);
@@ -41,7 +42,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public void delete(CustomerEntity customerEntity) throws Exception {
-
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
             session.delete(customerEntity);
@@ -53,17 +54,20 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
+
     public CustomerEntity get(Integer id) throws Exception {
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
         CustomerEntity customerEntity = session.get(CustomerEntity.class,id);
         return customerEntity;
-    }
 
+    }
 
     @Override
     public List<CustomerEntity> getAll() throws Exception {
+
         String hql = "FROM CustomerEntity";
         Query query = session.createQuery(hql);
-        List <CustomerEntity> customerEntities =   query.list();
+        List <CustomerEntity> customerEntities =  query.list();
         return customerEntities;
     }
 }

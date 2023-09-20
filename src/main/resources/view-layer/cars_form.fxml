@@ -54,14 +54,15 @@
       <TableView fx:id="carTable" layoutX="254.0" layoutY="15.0" prefHeight="406.0" prefWidth="536.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="78.4000244140625" text="Car Id" />
-          <TableColumn fx:id="colNumber" prefWidth="109.5999755859375" text="Number" />
-            <TableColumn fx:id="colBrand" prefWidth="70.4000244140625" text="Brand" />
-            <TableColumn fx:id="colModel" prefWidth="100.0" text="Model" />
-            <TableColumn fx:id="colRate" prefWidth="89.60003662109375" text="Rate" />
-            <TableColumn fx:id="colToRent" prefWidth="91.199951171875" text="To Rent?" />
+          <TableColumn fx:id="colNumber" prefWidth="96.79998779296875" text="Number" />
+            <TableColumn fx:id="colBrand" prefWidth="84.0" text="Brand" />
+            <TableColumn fx:id="colModel" prefWidth="88.79998779296875" text="Model" />
+            <TableColumn fx:id="colRate" prefWidth="72.800048828125" text="Rate" />
+            <TableColumn fx:id="colToRent" prefWidth="120.0" text="Available to Rent?" />
         </columns>
       </TableView>
       <Label layoutX="11.0" layoutY="232.0" prefHeight="20.0" prefWidth="87.0" text=" Category  : " />
       <TextField fx:id="catIdText" layoutX="125.0" layoutY="230.0" prefHeight="26.0" prefWidth="118.0" />
+      <Button layoutX="125.0" layoutY="264.0" mnemonicParsing="false" onAction="#clearButtonAction" prefHeight="26.0" prefWidth="59.0" text="Clear" />
    </children>
 </AnchorPane>

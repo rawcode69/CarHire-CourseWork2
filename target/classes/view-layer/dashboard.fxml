@@ -35,7 +35,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="rentButton" alignment="BASELINE_LEFT" layoutX="15.0" layoutY="335.0" mnemonicParsing="false" onAction="#rentButtonOnAction" prefHeight="46.0" prefWidth="154.0" text="Rent">
+      <Button fx:id="rentButton" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="402.0" mnemonicParsing="false" onAction="#rentButtonOnAction" prefHeight="46.0" prefWidth="154.0" text="Rent">
          <graphic>
             <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -44,7 +44,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="userButton" alignment="BASELINE_LEFT" layoutX="15.0" layoutY="401.0" mnemonicParsing="false" onAction="#userButtonOnAction" prefHeight="46.0" prefWidth="154.0" text="Users">
+      <Button fx:id="userButton" alignment="BASELINE_LEFT" layoutX="15.0" layoutY="333.0" mnemonicParsing="false" onAction="#userButtonOnAction" prefHeight="46.0" prefWidth="154.0" text="Users">
          <graphic>
             <ImageView fitHeight="46.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                <image>

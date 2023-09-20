@@ -3,11 +3,9 @@ package lk.carhire.view.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import lk.carhire.controller.CategoryController;
 import lk.carhire.dto.CategoryDto;
 import lk.carhire.dto.tm.CategoryTM;
@@ -25,14 +23,12 @@ public class CategoryFormController {
     public TableColumn colCatName;
     public TableView catTable;
 
+
     public void initialize() {
         categoryController = new CategoryController();
         System.out.println("Category Form Initialized");
-
-        setCellValueFactory();
-        ArrayList<CategoryDto> categoryDtos = loadAllCategories();
-
-        setTableData(categoryDtos);
+        tableListener();
+        loadTable();
     }
 
     private void setTableData(ArrayList<CategoryDto> categoryDtos) {
@@ -75,6 +71,8 @@ public class CategoryFormController {
         try {
             categoryController.deleteCategory(categoryDto);
             new Alert(Alert.AlertType.CONFIRMATION,"Category Deleted").show();
+            clearForm();
+            loadTable();
         }catch (Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
@@ -86,7 +84,8 @@ public class CategoryFormController {
         try {
             categoryController.updateCategory(category);
             new Alert(Alert.AlertType.CONFIRMATION,"Category Updated").show();
-
+            loadTable();
+            clearForm();
         }catch (Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
@@ -99,11 +98,17 @@ public class CategoryFormController {
         try {
             Integer id =  categoryController.saveCategory(category);
             new Alert(Alert.AlertType.CONFIRMATION, "Category Saved").show();
-            System.out.println(id);
+            clearForm();
+            loadTable();
         }catch (Exception e){
             new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
         }
 
+    }
+
+    private void clearForm() {
+        catIdText.setText("");
+        catNameText.setText(" ");
     }
 
     private void getCategory() throws Exception{
@@ -134,5 +139,34 @@ public class CategoryFormController {
         return  null;
     }
 
+    private void loadTable(){
+        ArrayList<CategoryDto> categoryDtos = loadAllCategories();
+        setCellValueFactory();
+        setTableData(categoryDtos);
+    }
+
+    public void clearButtonAction(ActionEvent actionEvent) {
+        clearForm();
+    }
+
+    private void tableListener(){
+        catTable.getSelectionModel().selectedItemProperty().
+                addListener((observable, oldValue, newValue) -> {
+                    setData((CategoryTM) newValue);
+                });
+    }
+
+    private void setData(CategoryTM categoryTM){
+        try {
+            if(categoryTM.getId() != null){
+                catIdText.setText(categoryTM.getId());
+                catNameText.setText(categoryTM.getName());
+
+            }
+
+        }catch (Exception e){
+
+        }
+    }
 
 }

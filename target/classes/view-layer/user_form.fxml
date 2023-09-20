@@ -12,7 +12,7 @@
 <AnchorPane prefHeight="442.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.carhire.view.controller.UserFormController">
    <children>
       <Label layoutX="14.0" layoutY="18.0" prefHeight="20.0" prefWidth="50.0" text="User Id :" />
-      <TextField fx:id="idText" layoutX="63.0" layoutY="15.0" prefHeight="26.0" prefWidth="99.0" />
+      <TextField fx:id="idText" layoutX="63.0" layoutY="15.0" onAction="#userIdAction" prefHeight="26.0" prefWidth="99.0" />
       <Label layoutX="14.0" layoutY="59.0" prefHeight="20.0" prefWidth="74.0" text="First Name :" />
       <TextField fx:id="firstNameText" layoutX="90.0" layoutY="56.0" prefHeight="26.0" prefWidth="153.0" />
       <Button fx:id="searchButton" layoutX="169.0" layoutY="16.0" mnemonicParsing="false" onAction="#searchButtonAction" prefHeight="26.0" prefWidth="74.0" text="Search" />
@@ -54,10 +54,11 @@
       <TableView fx:id="userTable" layoutX="254.0" layoutY="15.0" prefHeight="406.0" prefWidth="536.0">
         <columns>
           <TableColumn fx:id="colId" text="Id" />
-          <TableColumn fx:id="colFullName" prefWidth="132.0" text="Full Name" />
-            <TableColumn fx:id="colRole" prefWidth="152.0" text="Role" />
-            <TableColumn fx:id="colUserName" prefWidth="172.0001220703125" text="User Name" />
+          <TableColumn fx:id="colFullName" prefWidth="192.0" text="Full Name" />
+            <TableColumn fx:id="colRole" prefWidth="133.5999755859375" text="Role" />
+            <TableColumn fx:id="colUserName" prefWidth="130.40008544921875" text="User Name" />
         </columns>
       </TableView>
+      <Button fx:id="clearButton" layoutX="199.0" layoutY="226.0" mnemonicParsing="false" onAction="#clearButtonAction" text="Clear" />
    </children>
 </AnchorPane>
