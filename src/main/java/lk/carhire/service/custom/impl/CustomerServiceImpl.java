@@ -48,7 +48,7 @@ public class CustomerServiceImpl implements CustomerService {
         customerDto.setDistrict(customerEntity.getAddress().getDistrict());
         customerDto.setPostalCode(customerEntity.getPostalCode());
         customerDto.setMobile(customerEntity.getMobiles().toString());
-
+        customerDto.setToReturn(customerEntity.getToReturn());
         return  customerDto;
     }
 

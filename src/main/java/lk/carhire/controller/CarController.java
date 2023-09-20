@@ -30,4 +30,14 @@ public class CarController {
         List<CarDto> carDto = carService.getAllCars();
         return carDto;
     }
+
+    public List<CarDto> getCarsByCategory(String category) throws Exception {
+        List<CarDto> carDtos = carService.getCarsByCategory(category);
+        return  carDtos;
+    }
+
+    public CarDto getCarByCarNumber(String carNumber) {
+        CarDto carDto = carService.getCarByCarNumber(carNumber);
+        return carDto;
+    }
 }

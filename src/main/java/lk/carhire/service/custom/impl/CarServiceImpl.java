@@ -89,7 +89,7 @@ public class CarServiceImpl implements CarService {
         List<CarEntity> carEntities = carDao.getAll();
         List<CarDto> carDtos = new ArrayList<>();
 
-        for(CarEntity carEntity : carEntities){
+        for (CarEntity carEntity : carEntities) {
             CarDto carDto = new CarDto();
             carDto.setId(carEntity.getId());
             carDto.setNumber(carEntity.getNumber());
@@ -102,5 +102,41 @@ public class CarServiceImpl implements CarService {
             carDtos.add(carDto);
         }
         return carDtos;
+    }
+
+    @Override
+    public List<CarDto> getCarsByCategory(String category) throws Exception {
+        List<CarEntity> carEntities = carDao.getCarsByCategory(category);
+        List<CarDto> carDtos = new ArrayList<>();
+
+        for (CarEntity carEntity : carEntities) {
+            CarDto carDto = new CarDto();
+            carDto.setId(carEntity.getId());
+            carDto.setNumber(carEntity.getNumber());
+            carDto.setIsRentable(carEntity.getIsRentable());
+            carDto.setRate(carEntity.getRate());
+            carDto.setYear(carEntity.getYear());
+            carDto.setBrand((carEntity.getBrand()));
+            carDto.setModel(carEntity.getModel());
+
+            carDtos.add(carDto);
+        }
+        return carDtos;
+    }
+
+    @Override
+    public CarDto getCarByCarNumber(String carNumber) {
+        CarEntity carEntity = carDao.getCarByCarNumber(carNumber);
+        CarDto carDto = new CarDto();
+
+        carDto.setId(carEntity.getId());
+        carDto.setNumber(carEntity.getNumber());
+        carDto.setIsRentable(carEntity.getIsRentable());
+        carDto.setRate(carEntity.getRate());
+        carDto.setYear(carEntity.getYear());
+        carDto.setBrand((carEntity.getBrand()));
+        carDto.setModel(carEntity.getModel());
+
+        return null;
     }
 }

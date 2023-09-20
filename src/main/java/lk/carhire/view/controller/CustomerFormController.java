@@ -97,18 +97,19 @@ public class CustomerFormController {
 
     private void deleteCustomer() {
 
-        CustomerDto customerDto = new CustomerDto(
-                Integer.valueOf(custIdText.getText()),
-                userNameText.getText(),
-                emailText.getText(),
-                firstNameText.getText(),
-                lastNameText.getText(),
-                streetText.getText(),
-                cityText.getText(),
-                districtText.getText(),
-                postalCodeText.getText(),
-                mobileText.getText()
-        );
+        CustomerDto customerDto = new CustomerDto();
+
+        customerDto.setId(Integer.valueOf(custIdText.getText()));
+        customerDto.setUserName(userNameText.getText());
+        customerDto.setEmail(emailText.getText());
+        customerDto.setFirstName(firstNameText.getText());
+        customerDto.setLastName(lastNameText.getText());
+        customerDto.setStreet(streetText.getText());
+        customerDto.setCity(cityText.getText());
+        customerDto.setDistrict(districtText.getText());
+        customerDto.setPostalCode(postalCodeText.getText());
+        customerDto.setMobile(mobileText.getText());
+
 
         try {
             customerController.deleteCustomer(customerDto);
@@ -184,18 +185,18 @@ public class CustomerFormController {
     }
 
     private void updateCustomer(){
-        CustomerDto customerDto = new CustomerDto(
-                Integer.valueOf(custIdText.getText()),
-                userNameText.getText(),
-                emailText.getText(),
-                firstNameText.getText(),
-                lastNameText.getText(),
-                streetText.getText(),
-                cityText.getText(),
-                districtText.getText(),
-                postalCodeText.getText(),
-                mobileText.getText()
-        );
+        CustomerDto customerDto = new CustomerDto();
+
+        customerDto.setId(Integer.valueOf(custIdText.getText()));
+        customerDto.setUserName(userNameText.getText());
+        customerDto.setEmail(emailText.getText());
+        customerDto.setFirstName(firstNameText.getText());
+        customerDto.setLastName(lastNameText.getText());
+        customerDto.setStreet(streetText.getText());
+        customerDto.setCity(cityText.getText());
+        customerDto.setDistrict(districtText.getText());
+        customerDto.setPostalCode(postalCodeText.getText());
+        customerDto.setMobile(mobileText.getText());
 
         try {
             customerController.updateCustomer(customerDto);

@@ -36,6 +36,9 @@ public class CustomerEntity {
     @Column(name = "postalcode",length = 20,nullable = false)
     private String postalCode;
 
+    @Column(name = "returnDate", length = 20)
+    private Date toReturn;
+
     @ElementCollection
     @CollectionTable(
             name = "mobile",

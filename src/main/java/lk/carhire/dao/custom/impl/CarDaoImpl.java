@@ -1,6 +1,7 @@
 package lk.carhire.dao.custom.impl;
 
 import lk.carhire.dao.custom.CarDao;
+import lk.carhire.dto.CarDto;
 import lk.carhire.entity.CarEntity;
 import lk.carhire.util.SessionFactoryConfiguration;
 import org.hibernate.Session;
@@ -83,4 +84,30 @@ public class CarDaoImpl implements CarDao {
         List <CarEntity> carEntities = query.list();
         return carEntities;
     }
+
+    @Override
+    public List<CarEntity> getCarsByCategory(String category) throws Exception {
+        String hql = "SELECT car FROM CarEntity car INNER JOIN car.categoryEntity category WHERE category.name = :categoryName";
+        try {
+            Query query = session.createQuery(hql,CarEntity.class).
+                    setParameter("categoryName",category);
+            List<CarEntity> carEntities = query.list();
+            return carEntities;
+        }catch (Exception e){
+            throw e;
+        }
+    }
+
+    @Override
+    public CarEntity getCarByCarNumber(String number) {
+        String hql = "FROM CarEntity car WHERE car.number = :carNumber";
+        try {
+            CarEntity carEntity = session.createQuery(hql,CarEntity.class).
+                    setParameter("carNumber",number).uniqueResult();
+            return carEntity;
+        }catch (Exception e){
+            throw e;
+        }
+    }
+
 }

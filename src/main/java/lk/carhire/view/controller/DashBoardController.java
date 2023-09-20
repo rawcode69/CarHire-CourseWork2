@@ -4,15 +4,23 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DashBoardController {
 
 
     public AnchorPane formAnchorPane;
+    public Label dateLabel;
+
+    public void initialize(){
+        currentDate();
+    }
 
     public void categoryButtonOnAction(ActionEvent actionEvent) throws IOException {
 
@@ -65,5 +73,19 @@ public class DashBoardController {
 
         stage.setScene(scene);
         stage.centerOnScreen();
+    }
+    private void currentDate(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd - MMM - yyyy");
+        String dateNow = sdf.format(new Date());
+        dateLabel.setText(dateNow);
+    }
+
+    public void ongoingRentButtonOnAction(ActionEvent actionEvent) throws IOException {
+
+        Parent root = FXMLLoader.load(this.getClass().getResource("/view-layer/ongoingRent_form.fxml"));
+
+        this.formAnchorPane.getChildren().clear();
+        this.formAnchorPane.getChildren().add(root);
+
     }
 }

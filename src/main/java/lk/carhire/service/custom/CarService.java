@@ -16,4 +16,8 @@ public interface CarService extends SuperService {
 
 
     List<CarDto> getAllCars() throws Exception;
+
+    List<CarDto> getCarsByCategory(String category) throws Exception;
+
+    CarDto getCarByCarNumber(String carNumber);
 }

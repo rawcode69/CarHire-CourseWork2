@@ -37,10 +37,11 @@
       </Button>
       <TableView fx:id="custTable" layoutX="254.0" layoutY="15.0" prefHeight="418.0" prefWidth="536.0">
         <columns>
-          <TableColumn fx:id="clmCustId" prefWidth="75.20001220703125" text="Customer Id" />
-          <TableColumn fx:id="clmcustName" prefWidth="112.800048828125" text=" Name" />
-            <TableColumn fx:id="clmCustAddress" prefWidth="245.59991455078125" text="Address" />
-            <TableColumn fx:id="clmCustMobile" prefWidth="100.800048828125" text="Mobile" />
+          <TableColumn fx:id="clmCustId" prefWidth="92.79998779296875" text="Customer Id" />
+          <TableColumn fx:id="clmcustName" prefWidth="87.20001220703125" text=" Name" />
+            <TableColumn fx:id="clmCustAddress" prefWidth="92.79998779296875" text="Address" />
+            <TableColumn fx:id="clmCustMobile" prefWidth="158.39990234375" text="Mobile" />
+            <TableColumn fx:id="clmCustAddress1" prefWidth="106.4000244140625" text="Overdue Rent" />
         </columns>
       </TableView>
       <Separator layoutX="8.0" layoutY="78.0" prefHeight="3.0" prefWidth="238.0" />

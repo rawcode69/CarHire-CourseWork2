@@ -20,7 +20,7 @@ public class CategoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "Catname",length = 100, nullable = false)
+    @Column(name = "Catname",length = 100, nullable = false, unique = true)
     private String name;
 
     @OneToMany(mappedBy = "categoryEntity",targetEntity = CarEntity.class)

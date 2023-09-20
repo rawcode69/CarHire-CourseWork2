@@ -2,6 +2,8 @@ package lk.carhire.dto;
 
 import lombok.*;
 
+import java.util.Date;
+
 @Setter
 @Getter
 @ToString
@@ -19,6 +21,7 @@ public class CustomerDto {
     private String district;
     private String postalCode;
     private String mobile;
+    private Date toReturn;
 
     public CustomerDto(String userName, String email, String firstName, String lastName, String street, String city, String district, String postalCode, String mobile) {
         this.userName = userName;
