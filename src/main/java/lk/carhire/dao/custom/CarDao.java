@@ -11,7 +11,7 @@ public interface CarDao extends CrudDao <CarEntity,Integer> {
 
     public List <CarEntity> getCarsByCategory(String category) throws Exception;
 
-    public CarEntity getCarByCarNumber(String number) ;
+    public CarEntity getCarByCarNumber(String number) throws  Exception ;
 
 
 }

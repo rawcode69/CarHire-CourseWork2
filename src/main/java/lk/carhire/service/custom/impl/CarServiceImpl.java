@@ -28,6 +28,7 @@ public class CarServiceImpl implements CarService {
         carEntity.setRate(carDto.getRate());
         carEntity.setYear(carDto.getYear());
         carEntity.setIsRentable(true);
+        carEntity.setDepositAmount(carDto.getDepositAmount());
         carEntity.setCategoryEntity(categoryEntity);
 
         return carDao.add(carEntity);
@@ -46,7 +47,9 @@ public class CarServiceImpl implements CarService {
         carEntity.setBrand(carDto.getBrand());
         carEntity.setRate(carDto.getRate());
         carEntity.setYear(carDto.getYear());
+        carEntity.setDepositAmount(carDto.getDepositAmount());
         carEntity.setCategoryEntity(categoryEntity);
+
         carDao.update(carEntity);
     }
 
@@ -79,6 +82,7 @@ public class CarServiceImpl implements CarService {
         carEntity.setYear(carDto.getYear());
         carEntity.setCategoryEntity(categoryEntity);
         carEntity.setIsRentable(true);
+        carEntity.setDepositAmount(carDto.getDepositAmount());
 
         carDao.delete(carEntity);
     }
@@ -125,8 +129,9 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public CarDto getCarByCarNumber(String carNumber) {
+    public CarDto getCarByCarNumber(String carNumber) throws Exception {
         CarEntity carEntity = carDao.getCarByCarNumber(carNumber);
+
         CarDto carDto = new CarDto();
 
         carDto.setId(carEntity.getId());
@@ -137,6 +142,6 @@ public class CarServiceImpl implements CarService {
         carDto.setBrand((carEntity.getBrand()));
         carDto.setModel(carEntity.getModel());
 
-        return null;
+        return carDto;
     }
 }

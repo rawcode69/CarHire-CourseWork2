@@ -21,6 +21,7 @@ public class CarDto {
     private Double rate;
     private Integer catId;
     private Boolean isRentable;
+    private Double depositAmount;
 
 
     public CarDto(String number, String brand, String model, Integer year, Double rate, Integer catId) {

@@ -24,27 +24,27 @@
       <TextField fx:id="yearText" layoutX="125.0" layoutY="160.0" prefHeight="26.0" prefWidth="118.0" />
       <Label layoutX="14.0" layoutY="196.0" prefHeight="20.0" prefWidth="74.0" text="Rate : " />
       <TextField fx:id="rateText" layoutX="125.0" layoutY="194.0" prefHeight="26.0" prefWidth="118.0" />
-      <Button fx:id="saveButton" alignment="BASELINE_LEFT" layoutX="13.0" layoutY="264.0" mnemonicParsing="false" onAction="#saveButtonOnAction" prefHeight="43.0" prefWidth="99.0" text="Save">
+      <Button fx:id="saveButton" alignment="BASELINE_LEFT" layoutX="13.0" layoutY="317.0" mnemonicParsing="false" onAction="#saveButtonOnAction" prefHeight="26.0" prefWidth="87.0" text="Save">
          <graphic>
-            <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="28.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/save.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="updateButton" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="319.0" mnemonicParsing="false" onAction="#updateButtonAction" prefHeight="43.0" prefWidth="99.0" text="Update">
+      <Button fx:id="updateButton" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#updateButtonAction" prefHeight="34.0" prefWidth="87.0" text="Update">
          <graphic>
-            <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="28.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/update.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="deleteButton" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="372.0" mnemonicParsing="false" onAction="#deleteButtonAction" prefHeight="43.0" prefWidth="99.0" text="Delete">
+      <Button fx:id="deleteButton" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="394.0" mnemonicParsing="false" onAction="#deleteButtonAction" prefHeight="34.0" prefWidth="87.0" text="Delete">
          <graphic>
-            <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/delete.png" />
                </image>
@@ -58,11 +58,13 @@
             <TableColumn fx:id="colBrand" prefWidth="84.0" text="Brand" />
             <TableColumn fx:id="colModel" prefWidth="88.79998779296875" text="Model" />
             <TableColumn fx:id="colRate" prefWidth="72.800048828125" text="Rate" />
-            <TableColumn fx:id="colToRent" prefWidth="120.0" text="Available to Rent?" />
+            <TableColumn fx:id="colToRent" prefWidth="120.0" text="Free to Rent?" />
         </columns>
       </TableView>
       <Label layoutX="11.0" layoutY="232.0" prefHeight="20.0" prefWidth="87.0" text=" Category  : " />
       <TextField fx:id="catIdText" layoutX="125.0" layoutY="230.0" prefHeight="26.0" prefWidth="118.0" />
-      <Button layoutX="125.0" layoutY="264.0" mnemonicParsing="false" onAction="#clearButtonAction" prefHeight="26.0" prefWidth="59.0" text="Clear" />
+      <Button layoutX="125.0" layoutY="316.0" mnemonicParsing="false" onAction="#clearButtonAction" prefHeight="26.0" prefWidth="59.0" text="Clear" />
+      <Label layoutX="11.0" layoutY="267.0" prefHeight="20.0" prefWidth="87.0" text=" Deposit   : " />
+      <TextField fx:id="depositText" layoutX="125.0" layoutY="265.0" prefHeight="26.0" prefWidth="118.0" />
    </children>
 </AnchorPane>

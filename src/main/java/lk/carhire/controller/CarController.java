@@ -36,7 +36,7 @@ public class CarController {
         return  carDtos;
     }
 
-    public CarDto getCarByCarNumber(String carNumber) {
+    public CarDto getCarByCarNumber(String carNumber) throws Exception {
         CarDto carDto = carService.getCarByCarNumber(carNumber);
         return carDto;
     }

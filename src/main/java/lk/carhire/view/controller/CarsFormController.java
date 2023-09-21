@@ -23,6 +23,7 @@ public class CarsFormController {
     public TableColumn colModel;
     public TableColumn colRate;
     public TableColumn colToRent;
+    public TextField depositText;
     CarController carController;
 
     public void initialize() throws Exception {
@@ -102,6 +103,7 @@ public class CarsFormController {
             carDto.setYear(Integer.valueOf(yearText.getText()));
             carDto.setRate(Double.valueOf(rateText.getText()));
             carDto.setCatId(Integer.valueOf(catIdText.getText()));
+            carDto.setDepositAmount(Double.valueOf(depositText.getText()));
         try {
             carController.updateCars(carDto);
             new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated").show();
@@ -115,14 +117,16 @@ public class CarsFormController {
     }
 
     private void saveCars() {
+        CarDto carDto = new CarDto();
 
-        CarDto carDto = new CarDto(
-                carNumberText.getText(),
-                carBrandText.getText(),
-                carModelText.getText(),
-                Integer.valueOf(yearText.getText()),
-                Double.valueOf(rateText.getText()),
-                Integer.valueOf(catIdText.getText()));
+        carDto.setNumber(carNumberText.getText());
+        carDto.setBrand(carBrandText.getText());
+        carDto.setModel(carModelText.getText());
+        carDto.setYear(Integer.valueOf(yearText.getText()));
+        carDto.setRate(Double.valueOf(rateText.getText()));
+        carDto.setCatId(Integer.valueOf(catIdText.getText()));
+        carDto.setDepositAmount(Double.valueOf(depositText.getText()));
+
         try {
             Integer id = carController.saveCar(carDto);
             System.out.println(id);
@@ -184,6 +188,7 @@ public class CarsFormController {
         carDto.setYear(Integer.valueOf(yearText.getText()));
         carDto.setRate(Double.valueOf(rateText.getText()));
         carDto.setCatId(Integer.valueOf(catIdText.getText()));
+        carDto.setDepositAmount(Double.valueOf(depositText.getText()));
 
         try {
             carController.deleteCar(carDto);

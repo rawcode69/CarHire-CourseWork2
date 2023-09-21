@@ -11,12 +11,12 @@ import java.util.Date;
 @Data
 
 public class RentDto {
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private Double advancePayment;
     private Double depositAmount;
     private Integer customerId;
-
     private Integer carCategory;
     private String carNumber;
+    private Double advancedPayment;
 }

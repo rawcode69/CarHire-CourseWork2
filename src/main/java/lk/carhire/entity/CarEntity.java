@@ -37,6 +37,9 @@ public class CarEntity {
     @Column(name = "isRentable",nullable = false)
     private Boolean isRentable;
 
+    @Column(name = "depositAmount", nullable = false)
+    private Double depositAmount;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CatId",nullable = false)
     private CategoryEntity categoryEntity;
