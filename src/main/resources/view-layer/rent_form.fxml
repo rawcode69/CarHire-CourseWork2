@@ -29,7 +29,7 @@
             <TableColumn fx:id="colRate" prefWidth="83.20001220703125" text="Rate " />
             <TableColumn fx:id="colNosDays" minWidth="0.800048828125" prefWidth="123.199951171875" text="Nos Days" />
             <TableColumn fx:id="colAdvance" text="Advance" />
-            <TableColumn fx:id="calDeposit" prefWidth="81.5999755859375" text="Deposit" />
+            <TableColumn fx:id="colDeposit" prefWidth="81.5999755859375" text="Deposit" />
             <TableColumn fx:id="colTotal" prefWidth="96.0" text="Total Amount" />
             <TableColumn fx:id="colBalance" prefWidth="100.0" text="Balance to pay" />
         </columns>
@@ -76,5 +76,7 @@
       <ComboBox fx:id="carNumberCombo" layoutX="645.0" layoutY="63.0" prefHeight="26.0" prefWidth="118.0" />
       <Label fx:id="customerInfoLabel" layoutX="267.0" layoutY="106.0" prefHeight="26.0" prefWidth="238.0" />
       <Label fx:id="carInfoLabel" layoutX="515.0" layoutY="128.0" prefHeight="26.0" prefWidth="238.0" />
+      <Label layoutX="14.0" layoutY="384.0" prefHeight="26.0" prefWidth="42.0" text="Date :" />
+      <Label fx:id="currentDateLabel" layoutX="56.0" layoutY="384.0" prefHeight="26.0" prefWidth="107.0" />
    </children>
 </AnchorPane>

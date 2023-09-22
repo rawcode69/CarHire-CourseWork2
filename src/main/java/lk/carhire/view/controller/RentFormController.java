@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import lk.carhire.controller.CarController;
 import lk.carhire.controller.CategoryController;
 import lk.carhire.controller.CustomerController;
@@ -16,6 +17,7 @@ import lk.carhire.dto.RentDto;
 import lk.carhire.dto.tm.CategoryTM;
 import lk.carhire.dto.tm.RentTM;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
@@ -44,18 +46,21 @@ public class RentFormController {
     public DatePicker EndDatePicker;
     public TextField advancePaymentText;
     public TextField depositAmountText;
+
+    public Label currentDateLabel;
     CustomerController customerController;
     CategoryController categoryController;
     CarController carController;
 
     RentController rentController;
+
     public void initialize() throws Exception {
         customerController = new CustomerController();
         categoryController = new CategoryController();
         carController = new CarController();
         rentController = new RentController();
         setCategories();
-
+        currentDate();
     }
 
     public void checkCutomerButtonAction(ActionEvent actionEvent) throws Exception {
@@ -95,8 +100,8 @@ public class RentFormController {
             }
             carCatCombo.setItems(obList);
 
-        }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
 
     }
@@ -104,7 +109,7 @@ public class RentFormController {
     private void setCars() throws Exception {
 
         try {
-            String category =  carCatCombo.getValue().toString();
+            String category = carCatCombo.getValue().toString();
             List<CarDto> carDtos = carController.getCarsByCategory(category);
 
             ObservableList<String> obList = FXCollections.observableArrayList();
@@ -115,24 +120,25 @@ public class RentFormController {
 
             carNumberCombo.setItems(obList);
 
-        }catch (Exception e){
+        } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
 
 
     }
+
     public void carCategoryOnAction(ActionEvent actionEvent) throws Exception {
         setCars();
         System.out.println(carCatCombo.getValue().toString());
     }
 
-    public CarDto getCarByCarNumber(){
+    public CarDto getCarByCarNumber() {
         try {
             String carNumber = carNumberCombo.getValue().toString();
             System.out.println(carNumber);
             CarDto carDto = carController.getCarByCarNumber(carNumber);
             return carDto;
-        }catch (Exception e){
+        } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             return null;
         }
@@ -140,14 +146,14 @@ public class RentFormController {
 
     public void checkCarButtonAction(ActionEvent actionEvent) {
 
-        CarDto carDto =  getCarByCarNumber();
+        CarDto carDto = getCarByCarNumber();
 
         String rentStatus = "Car is free for Rent";
 
-        if(!carDto.getIsRentable()){
+        if (!carDto.getIsRentable()) {
             rentStatus = "Car is not free for Rent";
         }
-        String carInfo = carDto.getBrand().toString()+", "+carDto.getModel()+", "+carDto.getYear()+" - "+rentStatus;
+        String carInfo = carDto.getBrand().toString() + ", " + carDto.getModel() + ", " + carDto.getYear() + " - " + rentStatus;
         carInfoLabel.setText(carInfo);
         depositAmountText.setText(String.valueOf(carDto.getDepositAmount()));
 
@@ -156,10 +162,10 @@ public class RentFormController {
     }
 
     public void addButtonAction(ActionEvent actionEvent) throws Exception {
-      loadTable();
+        loadTable();
     }
 
-    private void setValueFactory(){
+    private void setValueFactory() {
         colCustName.setCellValueFactory(new PropertyValueFactory<>("custName"));
         colCarNumber.setCellValueFactory(new PropertyValueFactory<>("carNumber"));
         colRate.setCellValueFactory(new PropertyValueFactory<>("rate"));
@@ -170,14 +176,15 @@ public class RentFormController {
         colBalance.setCellValueFactory(new PropertyValueFactory<>("balanceToPay"));
 
     }
+
     private String setTableData() throws Exception {
 
-        ObservableList <RentTM> obList = FXCollections.observableArrayList();
+        ObservableList<RentTM> obList = FXCollections.observableArrayList();
 
         RentTM rentTM = new RentTM();
         CustomerDto customerDto = customerController.getCustomer(Integer.valueOf(idText.getText()));
 
-        String custName = customerDto.getFirstName() + " "+customerDto.getLastName();
+        String custName = customerDto.getFirstName() + " " + customerDto.getLastName();
 
         LocalDate starDate = startDatePicker.getValue();
         LocalDate endDate = EndDatePicker.getValue();
@@ -185,13 +192,13 @@ public class RentFormController {
         String msg = null;
         long nosDates = 0;
 
-        if(starDate != null && endDate != null ){
-             nosDates = starDate.until(endDate, ChronoUnit.DAYS);
+        if (starDate != null && endDate != null) {
+            nosDates = starDate.until(endDate, ChronoUnit.DAYS);
         }
 
-       CarDto carDto = carController.getCarByCarNumber(carNumberCombo.getValue().toString());
+        CarDto carDto = carController.getCarByCarNumber(carNumberCombo.getValue().toString());
 
-        double total =  (nosDates * carDto.getRate());
+        double total = (nosDates * carDto.getRate());
 
 
         rentTM.setCustName(custName);
@@ -199,54 +206,78 @@ public class RentFormController {
         rentTM.setRate(String.valueOf(carDto.getRate()));
         rentTM.setNosDays(String.valueOf(nosDates));
         rentTM.setAdvance(advancePaymentText.getText());
-        rentTM.setDeposit(String.valueOf(carDto.getDepositAmount()));
+        rentTM.setDeposit(depositAmountText.getText());
         rentTM.setTotalAmount(String.valueOf(total));
         rentTM.setBalanceToPay((String.valueOf(total - Double.valueOf(advancePaymentText.getText()))));
 
         obList.add(rentTM);
         rentTable.setItems(obList);
 
-        if(nosDates < 0){
+        if (nosDates < 0) {
             return msg = "Please Input Valid Dates";
-        }else {
+        } else {
             return msg;
         }
     }
 
     private void loadTable() throws Exception {
         setValueFactory();
-       String msg = setTableData();
+        String msg = setTableData();
 
-       if(msg != null){
-           new Alert(Alert.AlertType.INFORMATION, msg).show();
-       }
+        if (msg != null) {
+            new Alert(Alert.AlertType.INFORMATION, msg).show();
+        }
     }
 
 
-    public void rentButtonOnAction(ActionEvent actionEvent) {
+    public void rentButtonOnAction(ActionEvent actionEvent) throws Exception {
         placeRent();
     }
 
-    private void placeRent() {
+    private void placeRent() throws Exception {
 
+        CarDto carDto = carController.getCarByCarNumber(carNumberCombo.getValue().toString());
+        Double rate = carDto.getRate();
+
+        LocalDate starDate = startDatePicker.getValue();
+        LocalDate endDate = EndDatePicker.getValue();
+
+        long nosDates = 0;
+
+        if (starDate != null && endDate != null) {
+            nosDates = starDate.until(endDate, ChronoUnit.DAYS);
+        }
+        Double total = rate * nosDates;
         RentDto rentDto = new RentDto();
 
-        rentDto.setStartDate(startDatePicker.getValue().toString());
-        rentDto.setEndDate(EndDatePicker.getValue().toString());
-        rentDto.setAdvancePayment(Double.valueOf( advancePaymentText.getText()));
+        rentDto.setRentDate(java.sql.Date.valueOf(currentDateLabel.getText()));
+        rentDto.setStartDate(java.sql.Date.valueOf(startDatePicker.getValue()));
+        rentDto.setEndDate(java.sql.Date.valueOf(EndDatePicker.getValue()));
+        rentDto.setAdvancePayment(Double.valueOf(advancePaymentText.getText()));
         rentDto.setDepositAmount(Double.valueOf(depositAmountText.getText()));
         rentDto.setCustomerId(Integer.valueOf(idText.getText()));
         rentDto.setCarCategory(Integer.valueOf(carCatCombo.getValue().toString()));
         rentDto.setCarNumber(carNumberCombo.getValue().toString());
         rentDto.setAdvancedPayment(Double.valueOf(advancePaymentText.getText()));
-
+        rentDto.setRate(rate);
+        rentDto.setTotal(total);
         try {
+
+
             String resp = rentController.placeRent(rentDto);
-            new Alert(Alert.AlertType.CONFIRMATION,resp).show();
-        }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+            new Alert(Alert.AlertType.CONFIRMATION, resp).show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
 
 
     }
+
+    private void currentDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dateNow = sdf.format(new Date());
+        currentDateLabel.setText(dateNow);
+    }
+
+
 }

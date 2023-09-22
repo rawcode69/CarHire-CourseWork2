@@ -110,4 +110,17 @@ public class CarDaoImpl implements CarDao {
         }
     }
 
+    @Override
+    public CarEntity getCarByCarNumber(String carNumber, Session session) {
+
+        String hql = "FROM CarEntity car WHERE car.number = :carNumber";
+        try {
+            CarEntity carEntity = session.createQuery(hql,CarEntity.class).
+                    setParameter("carNumber",carNumber).uniqueResult();
+            return carEntity;
+        }catch (Exception e){
+            throw e;
+        }
+    }
+
 }

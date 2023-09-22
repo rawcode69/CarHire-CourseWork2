@@ -70,4 +70,9 @@ public class CustomerDaoImpl implements CustomerDao {
         List <CustomerEntity> customerEntities =  query.list();
         return customerEntities;
     }
+
+    @Override
+    public CustomerEntity get(Integer customerId, Session session) {
+        return null;
+    }
 }

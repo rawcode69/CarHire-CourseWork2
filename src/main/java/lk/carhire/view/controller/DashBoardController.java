@@ -16,9 +16,11 @@ public class DashBoardController {
 
 
     public AnchorPane formAnchorPane;
-    public Label dateLabel;
+    public Label currentDateLabel;
+
 
     public void initialize(){
+
         currentDate();
     }
 
@@ -77,7 +79,7 @@ public class DashBoardController {
     private void currentDate(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd - MMM - yyyy");
         String dateNow = sdf.format(new Date());
-        dateLabel.setText(dateNow);
+        currentDateLabel.setText(dateNow);
     }
 
     public void ongoingRentButtonOnAction(ActionEvent actionEvent) throws IOException {

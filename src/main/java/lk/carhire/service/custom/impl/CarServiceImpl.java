@@ -102,7 +102,7 @@ public class CarServiceImpl implements CarService {
             carDto.setYear(carEntity.getYear());
             carDto.setBrand((carEntity.getBrand()));
             carDto.setModel(carEntity.getModel());
-
+            carDto.setDepositAmount(carEntity.getDepositAmount());
             carDtos.add(carDto);
         }
         return carDtos;
@@ -122,6 +122,7 @@ public class CarServiceImpl implements CarService {
             carDto.setYear(carEntity.getYear());
             carDto.setBrand((carEntity.getBrand()));
             carDto.setModel(carEntity.getModel());
+            carDto.setDepositAmount(carEntity.getDepositAmount());
 
             carDtos.add(carDto);
         }
@@ -141,6 +142,7 @@ public class CarServiceImpl implements CarService {
         carDto.setYear(carEntity.getYear());
         carDto.setBrand((carEntity.getBrand()));
         carDto.setModel(carEntity.getModel());
+        carDto.setDepositAmount(carEntity.getDepositAmount());
 
         return carDto;
     }

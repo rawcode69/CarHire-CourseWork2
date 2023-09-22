@@ -16,7 +16,11 @@ import java.util.Date;
 public class RentEntity {
     @Id
     @Column(name = "RentId",nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "rentDate",nullable = false,columnDefinition = "date")
+    private Date date;
 
     @Column(name = "StartDate",nullable = false,columnDefinition = "date")
     private Date startDate;

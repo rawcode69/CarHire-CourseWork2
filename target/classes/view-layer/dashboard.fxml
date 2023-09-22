@@ -70,7 +70,7 @@
       </Button>
       <AnchorPane fx:id="formAnchorPane" layoutX="186.0" layoutY="114.0" prefHeight="442.0" prefWidth="800.0" />
       <Separator layoutX="181.0" layoutY="127.0" orientation="VERTICAL" prefHeight="425.0" prefWidth="2.0" />
-      <Label fx:id="dateLabel" layoutX="60.0" layoutY="522.0" prefHeight="30.0" prefWidth="90.0" />
+      <Label fx:id="currentDateLabel" layoutX="60.0" layoutY="522.0" prefHeight="30.0" prefWidth="90.0" />
       <Label layoutX="15.0" layoutY="522.0" prefHeight="30.0" prefWidth="42.0" text="Date : " />
       <Button fx:id="ongoingRentButton" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="411.0" mnemonicParsing="false" onAction="#ongoingRentButtonOnAction" prefHeight="43.0" prefWidth="138.0" text="Ongoing Rents">
          <graphic>
