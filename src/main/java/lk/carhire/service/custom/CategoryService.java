@@ -18,4 +18,6 @@ public interface CategoryService extends SuperService {
     public void deleteCategory(CategoryDto categoryDto) throws Exception;
 
     List<CategoryDto> getAllCatergories() throws  Exception;
+
+    CategoryDto getCategoryByName(String catName) throws Exception;
 }

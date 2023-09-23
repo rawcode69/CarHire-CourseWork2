@@ -62,10 +62,10 @@ public class CarDaoImpl implements CarDao {
         String sql = "DELETE FROM car WHERE CarId = :carID";
         try {
             Query query = session.createNativeQuery(sql);
-            query.setParameter("carID",carEntity.getId());
+            query.setParameter("carID", carEntity.getId());
             Integer deleted = query.executeUpdate();
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             throw e;
         }
@@ -81,7 +81,7 @@ public class CarDaoImpl implements CarDao {
     public List<CarEntity> getAll() throws Exception {
         String hql = "FROM CarEntity";
         Query query = session.createQuery(hql);
-        List <CarEntity> carEntities = query.list();
+        List<CarEntity> carEntities = query.list();
         return carEntities;
     }
 
@@ -89,11 +89,11 @@ public class CarDaoImpl implements CarDao {
     public List<CarEntity> getCarsByCategory(String category) throws Exception {
         String hql = "SELECT car FROM CarEntity car INNER JOIN car.categoryEntity category WHERE category.name = :categoryName";
         try {
-            Query query = session.createQuery(hql,CarEntity.class).
-                    setParameter("categoryName",category);
+            Query query = session.createQuery(hql, CarEntity.class).
+                    setParameter("categoryName", category);
             List<CarEntity> carEntities = query.list();
             return carEntities;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
     }
@@ -102,10 +102,10 @@ public class CarDaoImpl implements CarDao {
     public CarEntity getCarByCarNumber(String number) {
         String hql = "FROM CarEntity car WHERE car.number = :carNumber";
         try {
-            CarEntity carEntity = session.createQuery(hql,CarEntity.class).
-                    setParameter("carNumber",number).uniqueResult();
+            CarEntity carEntity = session.createQuery(hql, CarEntity.class).
+                    setParameter("carNumber", number).uniqueResult();
             return carEntity;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
     }
@@ -114,13 +114,17 @@ public class CarDaoImpl implements CarDao {
     public CarEntity getCarByCarNumber(String carNumber, Session session) {
 
         String hql = "FROM CarEntity car WHERE car.number = :carNumber";
-        try {
-            CarEntity carEntity = session.createQuery(hql,CarEntity.class).
-                    setParameter("carNumber",carNumber).uniqueResult();
+
+            CarEntity carEntity = session.createQuery(hql, CarEntity.class).
+                    setParameter("carNumber", carNumber).uniqueResult();
             return carEntity;
-        }catch (Exception e){
-            throw e;
-        }
+
+    }
+
+    @Override
+    public void update(CarEntity carEntity, Session session) {
+        session.update(carEntity);
+
     }
 
 }

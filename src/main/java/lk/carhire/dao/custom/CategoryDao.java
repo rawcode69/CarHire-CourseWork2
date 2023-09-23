@@ -6,4 +6,6 @@ import lk.carhire.entity.CategoryEntity;
 
 public interface CategoryDao extends CrudDao<CategoryEntity,Integer> {
 
+
+    CategoryEntity getCategoryByName(String catName);
 }

@@ -28,6 +28,7 @@ public class SessionFactoryConfiguration {
     }
 
     public Session getSession(){
+
         return sessionFactory.openSession();
     }
 

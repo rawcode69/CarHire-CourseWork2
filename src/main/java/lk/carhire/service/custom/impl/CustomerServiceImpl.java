@@ -25,9 +25,7 @@ public class CustomerServiceImpl implements CustomerService {
         CustomerAddress address = new CustomerAddress(customerDto.getStreet(),customerDto.getCity(),customerDto.getDistrict());
         customerEntity.setAddress(address);
         customerEntity.setPostalCode(customerDto.getPostalCode());
-        List <String> mobiles = new ArrayList<>();
-        mobiles.add(customerDto.getMobile());
-        customerEntity.setMobiles(mobiles);
+        customerEntity.setMobiles(customerDto.getMobile());
 
         return customerDao.add(customerEntity);
 
@@ -47,7 +45,7 @@ public class CustomerServiceImpl implements CustomerService {
         customerDto.setCity(customerEntity.getAddress().getCity());
         customerDto.setDistrict(customerEntity.getAddress().getDistrict());
         customerDto.setPostalCode(customerEntity.getPostalCode());
-        customerDto.setMobile(customerEntity.getMobiles().toString());
+        customerDto.setMobile(customerEntity.getMobiles());
         customerDto.setToReturn(customerEntity.getToReturn());
         return  customerDto;
     }
@@ -65,9 +63,7 @@ public class CustomerServiceImpl implements CustomerService {
         CustomerAddress address = new CustomerAddress(customerDto.getStreet(),customerDto.getCity(),customerDto.getDistrict());
         customerEntity.setAddress(address);
         customerEntity.setPostalCode(customerDto.getPostalCode());
-        List <String> mobiles = new ArrayList<>();
-        mobiles.add(customerDto.getMobile());
-        customerEntity.setMobiles(mobiles);
+        customerEntity.setMobiles(customerDto.getMobile());
 
         customerDao.update(customerEntity);
     }
@@ -84,9 +80,7 @@ public class CustomerServiceImpl implements CustomerService {
         CustomerAddress address = new CustomerAddress(customerDto.getStreet(),customerDto.getCity(),customerDto.getDistrict());
         customerEntity.setAddress(address);
         customerEntity.setPostalCode(customerDto.getPostalCode());
-        List <String> mobiles = new ArrayList<>();
-        mobiles.add(customerDto.getMobile());
-        customerEntity.setMobiles(mobiles);
+        customerEntity.setMobiles(customerDto.getMobile());
 
         customerDao.delete(customerEntity);
 
@@ -108,7 +102,7 @@ public class CustomerServiceImpl implements CustomerService {
             customerDto.setCity(customerEntity.getAddress().getCity());
             customerDto.setDistrict(customerEntity.getAddress().getDistrict());
             customerDto.setPostalCode(customerEntity.getPostalCode());
-            customerDto.setMobile(customerEntity.getMobiles().toString());
+            customerDto.setMobile(customerEntity.getMobiles());
 
             customerDtos.add(customerDto);
         }

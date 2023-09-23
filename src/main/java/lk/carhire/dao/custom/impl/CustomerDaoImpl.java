@@ -13,6 +13,7 @@ import java.util.List;
 public class CustomerDaoImpl implements CustomerDao {
 
     Session session = SessionFactoryConfiguration.getInstance().getSession();
+
     @Override
     public Integer add(CustomerEntity customerEntity) throws Exception {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
@@ -21,7 +22,7 @@ public class CustomerDaoImpl implements CustomerDao {
             Integer id = (Integer) session.save(customerEntity);
             transaction.commit();
             return id;
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             return -1;
         }
@@ -34,7 +35,8 @@ public class CustomerDaoImpl implements CustomerDao {
         try {
             session.update(customerEntity);
             transaction.commit();
-        }catch (Exception e){
+            session.close();
+        } catch (Exception e) {
             transaction.rollback();
             throw e;
         }
@@ -47,7 +49,7 @@ public class CustomerDaoImpl implements CustomerDao {
         try {
             session.delete(customerEntity);
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             throw e;
         }
@@ -57,7 +59,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     public CustomerEntity get(Integer id) throws Exception {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
-        CustomerEntity customerEntity = session.get(CustomerEntity.class,id);
+        CustomerEntity customerEntity = session.get(CustomerEntity.class, id);
         return customerEntity;
 
     }
@@ -67,12 +69,20 @@ public class CustomerDaoImpl implements CustomerDao {
 
         String hql = "FROM CustomerEntity";
         Query query = session.createQuery(hql);
-        List <CustomerEntity> customerEntities =  query.list();
+        List<CustomerEntity> customerEntities = query.list();
         return customerEntities;
     }
 
     @Override
     public CustomerEntity get(Integer customerId, Session session) {
-        return null;
+        CustomerEntity customerEntity = session.get(CustomerEntity.class, customerId);
+        return customerEntity;
+    }
+
+    @Override
+    public void update(CustomerEntity customerEntity, Session session) {
+
+            session.update(customerEntity);
+
     }
 }

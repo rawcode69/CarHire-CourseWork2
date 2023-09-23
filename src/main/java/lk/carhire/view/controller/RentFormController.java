@@ -201,6 +201,7 @@ public class RentFormController {
         double total = (nosDates * carDto.getRate());
 
 
+
         rentTM.setCustName(custName);
         rentTM.setCarNumber(carDto.getNumber());
         rentTM.setRate(String.valueOf(carDto.getRate()));
@@ -250,26 +251,28 @@ public class RentFormController {
         Double total = rate * nosDates;
         RentDto rentDto = new RentDto();
 
+        String catName = carCatCombo.getValue().toString();
+        CategoryDto categoryDto = categoryController.getCategoryByName(catName);
+
         rentDto.setRentDate(java.sql.Date.valueOf(currentDateLabel.getText()));
         rentDto.setStartDate(java.sql.Date.valueOf(startDatePicker.getValue()));
         rentDto.setEndDate(java.sql.Date.valueOf(EndDatePicker.getValue()));
         rentDto.setAdvancePayment(Double.valueOf(advancePaymentText.getText()));
         rentDto.setDepositAmount(Double.valueOf(depositAmountText.getText()));
         rentDto.setCustomerId(Integer.valueOf(idText.getText()));
-        rentDto.setCarCategory(Integer.valueOf(carCatCombo.getValue().toString()));
+        rentDto.setCarCategory(categoryDto.getId());
         rentDto.setCarNumber(carNumberCombo.getValue().toString());
         rentDto.setAdvancedPayment(Double.valueOf(advancePaymentText.getText()));
         rentDto.setRate(rate);
         rentDto.setTotal(total);
+
         try {
-
-
             String resp = rentController.placeRent(rentDto);
             new Alert(Alert.AlertType.CONFIRMATION, resp).show();
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            System.out.println(e);
         }
-
 
     }
 
@@ -278,6 +281,5 @@ public class RentFormController {
         String dateNow = sdf.format(new Date());
         currentDateLabel.setText(dateNow);
     }
-
 
 }

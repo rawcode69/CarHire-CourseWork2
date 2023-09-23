@@ -27,9 +27,6 @@ public class RentServiceImpl implements RentService {
         CustomerEntity customerEntity = customerDao.get(rentDto.getCustomerId(), session);
         CarEntity carEntity = carDao.getCarByCarNumber(rentDto.getCarNumber(), session);
 
-        Transaction transaction = session.beginTransaction();
-
-
         RentEntity rentEntity = new RentEntity();
 
         rentEntity.setDate(rentDto.getRentDate());
@@ -39,8 +36,10 @@ public class RentServiceImpl implements RentService {
         rentEntity.setTotal(rentDto.getTotal());
         rentEntity.setDeposit(rentDto.getDepositAmount());
         rentEntity.setAdvancedPayment(rentDto.getAdvancedPayment());
+        rentEntity.setCarEntity(carEntity);
+        rentEntity.setCustomerEntity(customerEntity);
 
-
+        Transaction transaction = session.beginTransaction();
         Integer rentId = rentDao.add(rentEntity, session);
 
         if (rentId != null) {
@@ -48,7 +47,9 @@ public class RentServiceImpl implements RentService {
             boolean isCustomerUpdated = true;
 
             customerEntity.setToReturn(rentDto.getEndDate());
-            customerDao.update(customerEntity);
+
+
+            customerDao.update(customerEntity, session);
 
             CustomerEntity customerEntity1 = customerDao.get(rentDto.getCustomerId(), session);
 
@@ -57,12 +58,12 @@ public class RentServiceImpl implements RentService {
             }
 
             if (isCustomerUpdated) {
-                transaction.commit();
+              //  transaction.commit();
 
                 boolean isCarUpdated = true;
 
                 carEntity.setIsRentable(false);
-                carDao.update(carEntity);
+                carDao.update(carEntity, session);
 
                 CarEntity carEntity1 = carDao.getCarByCarNumber(rentDto.getCarNumber(), session);
 
@@ -70,7 +71,7 @@ public class RentServiceImpl implements RentService {
                     isCarUpdated = false;
                 }
 
-                if (isCarUpdated) {
+                if (!isCarUpdated) {
                     transaction.commit();
                     return "Rent Placed Successfully";
                 } else {

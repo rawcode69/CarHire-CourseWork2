@@ -75,4 +75,17 @@ public class CategoryDaoImpl implements CategoryDao {
         List<CategoryEntity> categoryEntities = query.list();
         return categoryEntities;
     }
+
+    @Override
+    public CategoryEntity getCategoryByName(String catName) {
+        String hql = "FROM CategoryEntity cat WHERE cat.name = :catName";
+        try {
+            CategoryEntity categoryEntity = session.createQuery(hql,CategoryEntity.class).
+            setParameter("catName",catName).uniqueResult();
+            return categoryEntity;
+        }catch (Exception e){
+            throw e;
+        }
+
+    }
 }

@@ -51,5 +51,16 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDtos;
     }
 
+    @Override
+    public CategoryDto getCategoryByName(String catName) throws Exception {
+        CategoryEntity categoryEntity = categoryDao.getCategoryByName(catName);
+
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setName(categoryEntity.getName());
+        categoryDto.setId(categoryEntity.getId());
+
+        return categoryDto;
+    }
+
 
 }

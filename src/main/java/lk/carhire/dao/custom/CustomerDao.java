@@ -7,4 +7,6 @@ import org.hibernate.Session;
 
 public interface CustomerDao extends CrudDao<CustomerEntity,Integer> {
     CustomerEntity get(Integer customerId, Session session);
+
+    void update(CustomerEntity customerEntity, Session session);
 }

@@ -3,6 +3,7 @@ package lk.carhire.dao.custom.impl;
 import lk.carhire.dao.custom.RentDao;
 import lk.carhire.entity.RentEntity;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -34,6 +35,9 @@ public class RentDaoImpl implements RentDao {
 
     @Override
     public Integer add(RentEntity rentEntity, Session session) {
-        return null;
+
+            Integer id = (Integer) session.save(rentEntity);
+            return id;
+
     }
 }

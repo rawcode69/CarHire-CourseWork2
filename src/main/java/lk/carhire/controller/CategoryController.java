@@ -34,4 +34,9 @@ public class CategoryController {
         return categoryService.getAllCatergories();
 
     }
+
+
+    public CategoryDto getCategoryByName(String catName) throws Exception {
+        return categoryService.getCategoryByName(catName);
+    }
 }

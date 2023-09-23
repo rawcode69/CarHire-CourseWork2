@@ -39,12 +39,8 @@ public class CustomerEntity {
     @Column(name = "returnDate", length = 20)
     private Date toReturn;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "mobile",
-            joinColumns = @JoinColumn(name = "CustId")
-    )
-    private List <String> mobiles;
+   @Column(name = "mobile",length = 20)
+    private String mobiles;
 
     @OneToMany(mappedBy = "customerEntity",targetEntity = RentEntity.class)
     List<RentEntity> rentEntities;

@@ -49,7 +49,4 @@ public class RentEntity {
     private CustomerEntity customerEntity;
 
 
-
-
-
 }
