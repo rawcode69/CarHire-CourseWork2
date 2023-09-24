@@ -127,4 +127,10 @@ public class CarDaoImpl implements CarDao {
 
     }
 
+    @Override
+    public CarEntity get(Integer id, Session session) {
+        CarEntity carEntity = session.get(CarEntity.class, id);
+        return carEntity;
+    }
+
 }

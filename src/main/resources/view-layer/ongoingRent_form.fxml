@@ -1,17 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.carhire.view.controller.OngoingRentFormController">
+<AnchorPane prefHeight="442.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.carhire.view.controller.OngoingRentFormController">
    <children>
-      <TableView layoutX="36.0" layoutY="34.0" prefHeight="235.0" prefWidth="526.0">
+      <TableView fx:id="rentTable" layoutX="15.0" layoutY="19.0" prefHeight="257.0" prefWidth="770.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="colRentId" prefWidth="62.40002250671387" text="Rent Id" />
+          <TableColumn fx:id="colCustName" prefWidth="169.60001373291016" text=" Name" />
+            <TableColumn fx:id="colCarNumber" prefWidth="85.5999755859375" text="Number" />
+            <TableColumn fx:id="colRentDate" prefWidth="137.60003662109375" text="RentDate" />
+            <TableColumn fx:id="colReturnDate" prefWidth="115.19998168945312" text="ReturnDate" />
+            <TableColumn fx:id="colOverDue" prefWidth="75.99993896484375" text="Overdue" />
+            <TableColumn fx:id="colBalance" prefWidth="122.4000244140625" text="Balance To Pay" />
         </columns>
       </TableView>
+      <Button fx:id="rentCompletedButton" alignment="CENTER_RIGHT" layoutX="657.0" layoutY="362.0" mnemonicParsing="false" onAction="#rentCompletedButtonAction" prefHeight="46.0" prefWidth="122.0" text="Close Rent" />
+      <Label layoutX="24.0" layoutY="367.0" prefHeight="26.0" prefWidth="37.0" text="Date : " />
+      <Label fx:id="currentDateLabel" layoutX="62.0" layoutY="367.0" prefHeight="26.0" prefWidth="104.0" />
+      <ImageView fitHeight="37.0" fitWidth="44.0" layoutX="668.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/completed.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="24.0" layoutY="295.0" prefHeight="18.0" prefWidth="57.0" text="RentId" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="129.0" layoutY="295.0" prefHeight="18.0" prefWidth="57.0" text="Name" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="264.0" layoutY="295.0" prefHeight="18.0" prefWidth="57.0" text="Number" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="371.0" layoutY="295.0" prefHeight="18.0" prefWidth="57.0" text="RentDate" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="495.0" layoutY="295.0" prefHeight="18.0" prefWidth="71.0" text="ReturnDate" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="599.0" layoutY="295.0" prefHeight="18.0" prefWidth="71.0" text="OverDue" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="680.0" layoutY="295.0" prefHeight="18.0" prefWidth="91.0" text="Balance To Pay" />
+      <TextField fx:id="rentIdText" layoutX="17.0" layoutY="325.0" prefHeight="26.0" prefWidth="71.0" />
+      <TextField fx:id="custNameText" layoutX="95.0" layoutY="325.0" prefHeight="26.0" prefWidth="140.0" />
+      <TextField fx:id="carNumberText" layoutX="250.0" layoutY="325.0" prefHeight="26.0" prefWidth="78.0" />
+      <TextField fx:id="rentDateText" layoutX="347.0" layoutY="325.0" prefHeight="26.0" prefWidth="114.0" />
+      <TextField fx:id="returnDateText" layoutX="488.0" layoutY="325.0" prefHeight="26.0" prefWidth="91.0" />
+      <TextField fx:id="overDueText" layoutX="599.0" layoutY="325.0" prefHeight="26.0" prefWidth="71.0" />
+      <TextField fx:id="balanceToPayText" layoutX="677.0" layoutY="325.0" prefHeight="26.0" prefWidth="104.0" />
    </children>
 </AnchorPane>

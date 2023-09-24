@@ -75,6 +75,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public CustomerEntity get(Integer customerId, Session session) {
+
         CustomerEntity customerEntity = session.get(CustomerEntity.class, customerId);
         return customerEntity;
     }

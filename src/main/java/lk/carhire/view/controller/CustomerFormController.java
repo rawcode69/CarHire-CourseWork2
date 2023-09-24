@@ -254,7 +254,6 @@ public class CustomerFormController {
 
 
         try {
-
             Integer id = Integer.valueOf(customerTM.getId());
             CustomerDto customerDto = getCustomer(id);
             custIdText.setText(String.valueOf(id) );

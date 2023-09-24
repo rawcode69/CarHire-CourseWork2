@@ -18,4 +18,6 @@ public interface CarDao extends CrudDao <CarEntity,Integer> {
     CarEntity getCarByCarNumber(String carNumber, Session session);
 
     void update(CarEntity carEntity, Session session);
+
+    CarEntity get(Integer id, Session session);
 }

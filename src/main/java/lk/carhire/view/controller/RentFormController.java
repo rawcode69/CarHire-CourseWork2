@@ -262,9 +262,10 @@ public class RentFormController {
         rentDto.setCustomerId(Integer.valueOf(idText.getText()));
         rentDto.setCarCategory(categoryDto.getId());
         rentDto.setCarNumber(carNumberCombo.getValue().toString());
-        rentDto.setAdvancedPayment(Double.valueOf(advancePaymentText.getText()));
+        rentDto.setAdvancePayment(Double.valueOf(advancePaymentText.getText()));
         rentDto.setRate(rate);
         rentDto.setTotal(total);
+        rentDto.setIsActive(true);
 
         try {
             String resp = rentController.placeRent(rentDto);

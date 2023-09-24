@@ -4,18 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 
-public class RentTM {
+public class OngoingRentTM {
     private String rentId;
-    private String custName;
+    private String customerName;
     private String carNumber;
-    private String rate;
-    private String nosDays;
-    private String advance;
-    private String deposit;
-    private String totalAmount;
+    private String returnDate;
+    private String overdue;
     private String balanceToPay;
+    private String rentDate;
 }

@@ -12,6 +12,7 @@ import java.util.Date;
 
 public class RentDto {
 
+    private Integer id;
     private Date rentDate;
     private Date startDate;
     private Date endDate;
@@ -20,8 +21,7 @@ public class RentDto {
     private Integer customerId;
     private Integer carCategory;
     private String carNumber;
-    private Double advancedPayment;
     private Double rate;
     private Double total;
-
+    private Boolean isActive;
 }

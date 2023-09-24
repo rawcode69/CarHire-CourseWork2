@@ -40,6 +40,9 @@ public class RentEntity {
     @Column(name = "advancedPayment",nullable = false)
     private Double advancedPayment;
 
+    @Column(name = "isActive",nullable = false)
+    private Boolean isActive;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CarId",nullable = false)
     private CarEntity carEntity;
