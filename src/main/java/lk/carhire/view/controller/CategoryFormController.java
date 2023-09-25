@@ -34,8 +34,8 @@ public class CategoryFormController {
     private void setTableData(ArrayList<CategoryDto> categoryDtos) {
         ObservableList<CategoryTM> oblist = FXCollections.observableArrayList();
 
-        for(CategoryDto categoryDto : categoryDtos){
-            CategoryTM categoryTM = new CategoryTM(String.valueOf(categoryDto.getId()) ,categoryDto.getName());
+        for (CategoryDto categoryDto : categoryDtos) {
+            CategoryTM categoryTM = new CategoryTM(String.valueOf(categoryDto.getId()), categoryDto.getName());
             oblist.add(categoryTM);
         }
         catTable.setItems(oblist);
@@ -54,6 +54,7 @@ public class CategoryFormController {
     public void updateButtonAction(ActionEvent actionEvent) throws Exception {
         updateCategory();
     }
+
     public void searchButtonAction(ActionEvent actionEvent) throws Exception {
         getCategory();
     }
@@ -61,47 +62,58 @@ public class CategoryFormController {
     public void catTextOnAction(ActionEvent actionEvent) throws Exception {
         getCategory();
     }
+
     public void deleteButtonAction(ActionEvent actionEvent) {
         deleteCategory();
     }
 
     private void deleteCategory() {
-        CategoryDto categoryDto = new CategoryDto(Integer.valueOf(catIdText.getText()),catNameText.getText());
+        CategoryDto categoryDto = new CategoryDto(Integer.valueOf(catIdText.getText()), catNameText.getText());
 
         try {
             categoryController.deleteCategory(categoryDto);
-            new Alert(Alert.AlertType.CONFIRMATION,"Category Deleted").show();
+            new Alert(Alert.AlertType.CONFIRMATION, "Category Deleted").show();
             clearForm();
             loadTable();
-        }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
-    private void updateCategory() throws Exception{
-        CategoryDto category = new CategoryDto(Integer.valueOf(catIdText.getText()),catNameText.getText());
+    private void updateCategory() throws Exception {
 
-        try {
-            categoryController.updateCategory(category);
-            new Alert(Alert.AlertType.CONFIRMATION,"Category Updated").show();
-            loadTable();
-            clearForm();
-        }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        if (catNameText.getText() == "") {
+            new Alert(Alert.AlertType.ERROR, "The Category Name Cannot be Empty").show();
+        } else {
+
+            try {
+                CategoryDto category = new CategoryDto(Integer.valueOf(catIdText.getText()), catNameText.getText());
+                categoryController.updateCategory(category);
+                new Alert(Alert.AlertType.CONFIRMATION, "Category Updated").show();
+                loadTable();
+                clearForm();
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
         }
     }
 
     private void saveCategory() throws Exception {
 
-       CategoryDto category = new CategoryDto();
-       category.setName(catNameText.getText());
-        try {
-            Integer id =  categoryController.saveCategory(category);
-            new Alert(Alert.AlertType.CONFIRMATION, "Category Saved").show();
-            clearForm();
-            loadTable();
-        }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        CategoryDto category = new CategoryDto();
+
+        if (catNameText.getText() == "") {
+            new Alert(Alert.AlertType.ERROR, "The Category Name Cannot be Empty").show();
+        } else {
+            try {
+                category.setName(catNameText.getText());
+                Integer id = categoryController.saveCategory(category);
+                new Alert(Alert.AlertType.CONFIRMATION, "Category Saved").show();
+                clearForm();
+                loadTable();
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
         }
 
     }
@@ -111,16 +123,16 @@ public class CategoryFormController {
         catNameText.setText(" ");
     }
 
-    private void getCategory() throws Exception{
+    private void getCategory() throws Exception {
         Integer categoryId = Integer.valueOf(catIdText.getText());
         try {
             CategoryDto categoryDto = categoryController.getCategory(categoryId);
 
-            new Alert(Alert.AlertType.INFORMATION,"Category Id:"+categoryDto.getId().toString()+" "
-                    +" Category Name: "+categoryDto.getName()).show();
+            new Alert(Alert.AlertType.INFORMATION, "Category Id:" + categoryDto.getId().toString() + " "
+                    + " Category Name: " + categoryDto.getName()).show();
             setForm(categoryDto);
-        }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -128,18 +140,19 @@ public class CategoryFormController {
 
         catNameText.setText(categoryDto.getName());
     }
+
     private ArrayList<CategoryDto> loadAllCategories() {
 
-    try {
-        List<CategoryDto> categoryDtos = categoryController.getAllCatergories();
-        return (ArrayList<CategoryDto>) categoryDtos;
-    }catch (Exception e){
-        new Alert(Alert.AlertType.ERROR,"Categories not loaded");
-    }
-        return  null;
+        try {
+            List<CategoryDto> categoryDtos = categoryController.getAllCatergories();
+            return (ArrayList<CategoryDto>) categoryDtos;
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Categories not loaded");
+        }
+        return null;
     }
 
-    private void loadTable(){
+    private void loadTable() {
         ArrayList<CategoryDto> categoryDtos = loadAllCategories();
         setCellValueFactory();
         setTableData(categoryDtos);
@@ -149,22 +162,22 @@ public class CategoryFormController {
         clearForm();
     }
 
-    private void tableListener(){
+    private void tableListener() {
         catTable.getSelectionModel().selectedItemProperty().
                 addListener((observable, oldValue, newValue) -> {
                     setData((CategoryTM) newValue);
                 });
     }
 
-    private void setData(CategoryTM categoryTM){
+    private void setData(CategoryTM categoryTM) {
         try {
-            if(categoryTM.getId() != null){
+            if (categoryTM.getId() != null) {
                 catIdText.setText(categoryTM.getId());
                 catNameText.setText(categoryTM.getName());
 
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }

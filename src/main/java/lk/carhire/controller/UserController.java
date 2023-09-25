@@ -33,4 +33,9 @@ UserService userService = (UserService) ServiceFactory.getInstance().getService(
     public List<UserDto> getAllUsers() throws Exception {
         return userService.getAllUsers();
     }
+
+
+    public UserDto getUserByUserName(String userName) throws Exception {
+        return userService.getUserByUserName(userName);
+    }
 }

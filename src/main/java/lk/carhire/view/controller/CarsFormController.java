@@ -34,13 +34,13 @@ public class CarsFormController {
     }
 
     private void setTableData(List<CarDto> carDtos) {
-        ObservableList <CarTM> obList = FXCollections.observableArrayList();
+        ObservableList<CarTM> obList = FXCollections.observableArrayList();
 
-        for(CarDto carDto : carDtos){
+        for (CarDto carDto : carDtos) {
             String toRent = null;
-            if(carDto.getIsRentable() == true){
+            if (carDto.getIsRentable() == true) {
                 toRent = "YES";
-            }else {
+            } else {
                 toRent = "NO";
             }
             CarTM carTM = new CarTM();
@@ -89,57 +89,112 @@ public class CarsFormController {
     }
 
     private List<CarDto> getAllCars() throws Exception {
-        List <CarDto> carDtos =  carController.getAllCars();
+        List<CarDto> carDtos = carController.getAllCars();
         return carDtos;
     }
 
     private void updateCars() {
 
-        CarDto carDto = new CarDto();
-            carDto.setId(Integer.valueOf(carIdText.getText()));
-            carDto.setNumber(carNumberText.getText());
-            carDto.setBrand(carBrandText.getText());
-            carDto.setModel(carModelText.getText());
-            carDto.setYear(Integer.valueOf(yearText.getText()));
-            carDto.setRate(Double.valueOf(rateText.getText()));
-            carDto.setCatId(Integer.valueOf(catIdText.getText()));
-            carDto.setDepositAmount(Double.valueOf(depositText.getText()));
-        try {
-            carController.updateCars(carDto);
-            new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated").show();
-            clearForm();
-            loadTable();
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-            System.out.println(e.getMessage());
-        }
+        if (carNumberText.getText() == "" || carBrandText.getText() == "" || carModelText.getText() == "" || yearText.getText() == "" ||
+                rateText.getText() == "" || catIdText.getText() == "" || depositText.getText() == "") {
 
+            new Alert(Alert.AlertType.ERROR, "Any Field Cannot be Empty").show();
+        } else {
+
+            try {
+
+                CarDto carDto = new CarDto();
+
+                carDto.setId(Integer.valueOf(carIdText.getText()));
+                carDto.setNumber(carNumberText.getText());
+                carDto.setBrand(carBrandText.getText());
+                carDto.setModel(carModelText.getText());
+
+                try {
+                    carDto.setYear(Integer.valueOf(yearText.getText()));
+                } catch (NumberFormatException numberFormatException) {
+                    new Alert(Alert.AlertType.ERROR, "Year Should be a Number").show();
+                }
+
+                try {
+                    carDto.setRate(Double.valueOf(rateText.getText()));
+                } catch (NumberFormatException numberFormatException) {
+                    new Alert(Alert.AlertType.ERROR, "Rate Should be a Number").show();
+                }
+
+                carDto.setCatId(Integer.valueOf(catIdText.getText()));
+
+                try {
+                    carDto.setDepositAmount(Double.valueOf(depositText.getText()));
+                } catch (NumberFormatException numberFormatException) {
+                    new Alert(Alert.AlertType.ERROR, "Deposit Amount Should be a Number").show();
+                } catch (NullPointerException nullPointerException) {
+
+                }
+
+                carController.updateCars(carDto);
+                new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated").show();
+                clearForm();
+                loadTable();
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private void saveCars() {
-        CarDto carDto = new CarDto();
 
-        carDto.setNumber(carNumberText.getText());
-        carDto.setBrand(carBrandText.getText());
-        carDto.setModel(carModelText.getText());
-        carDto.setYear(Integer.valueOf(yearText.getText()));
-        carDto.setRate(Double.valueOf(rateText.getText()));
-        carDto.setCatId(Integer.valueOf(catIdText.getText()));
-        carDto.setDepositAmount(Double.valueOf(depositText.getText()));
+        if (carNumberText.getText() == "" || carBrandText.getText() == "" || carModelText.getText() == "" || yearText.getText() == "" ||
+                rateText.getText() == "" || catIdText.getText() == "" || depositText.getText() == "") {
 
-        try {
-            Integer id = carController.saveCar(carDto);
-            System.out.println(id);
-            clearForm();
-            loadTable();
-            if (id > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Car saved").show();
-            } else {
-                new Alert(Alert.AlertType.INFORMATION, "Car not Saved").show();
+            new Alert(Alert.AlertType.ERROR, "Any Field Cannot be Empty").show();
+        } else {
+
+            try {
+
+                CarDto carDto = new CarDto();
+
+                carDto.setNumber(carNumberText.getText());
+                carDto.setBrand(carBrandText.getText());
+                carDto.setModel(carModelText.getText());
+
+                try {
+                    carDto.setYear(Integer.valueOf(yearText.getText()));
+                } catch (NumberFormatException numberFormatException) {
+                    new Alert(Alert.AlertType.ERROR, "Year Should be a Number").show();
+                }
+
+                try {
+                    carDto.setRate(Double.valueOf(rateText.getText()));
+                } catch (NumberFormatException numberFormatException) {
+                    new Alert(Alert.AlertType.ERROR, "Rate Should be a Number").show();
+                }
+
+                carDto.setCatId(Integer.valueOf(catIdText.getText()));
+
+                try {
+                    carDto.setDepositAmount(Double.valueOf(depositText.getText()));
+                } catch (NumberFormatException numberFormatException) {
+                    new Alert(Alert.AlertType.ERROR, "Deposit Amount Should be a Number").show();
+                } catch (NullPointerException nullPointerException) {
+
+                }
+
+                Integer id = carController.saveCar(carDto);
+                System.out.println(id);
+                clearForm();
+                loadTable();
+                if (id > 0) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Car saved").show();
+                } else {
+                    new Alert(Alert.AlertType.INFORMATION, "Car not Saved").show();
+                }
+
+            } catch (Exception e) {
+                // new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+                System.out.println(e);
             }
-
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -150,11 +205,11 @@ public class CarsFormController {
         setForm(carDto);
     }
 
-    private CarDto getCar(Integer id) throws Exception{
+    private CarDto getCar(Integer id) throws Exception {
         try {
             CarDto carDto = carController.getCar(id);
             return carDto;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
     }
@@ -192,22 +247,22 @@ public class CarsFormController {
 
         try {
             carController.deleteCar(carDto);
-            new Alert(Alert.AlertType.CONFIRMATION,"Car Deleted Successfully").show();
+            new Alert(Alert.AlertType.CONFIRMATION, "Car Deleted Successfully").show();
             clearForm();
             loadTable();
-        }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
 
     }
 
     private void loadTable() throws Exception {
         setCellValueFactory();
-        List <CarDto> carDtos = getAllCars();
+        List<CarDto> carDtos = getAllCars();
         setTableData(carDtos);
     }
 
-    private void tableListener(){
+    private void tableListener() {
         carTable.getSelectionModel().selectedItemProperty().
                 addListener((observable, oldValue, newValue) -> {
                     try {
@@ -219,19 +274,19 @@ public class CarsFormController {
     }
 
     private void setData(CarTM carTM) throws Exception {
-            try {
-                Integer carId = Integer.valueOf(carTM.getId());
-                CarDto carDto = getCar(carId);
-                carIdText.setText(carTM.getId());
-                carNumberText.setText(carDto.getNumber());
-                carBrandText.setText(carDto.getBrand());
-                carModelText.setText(carDto.getModel());
-                yearText.setText(String.valueOf(carDto.getYear()));
-                rateText.setText(String.valueOf(carDto.getRate()));
-                catIdText.setText(String.valueOf(carDto.getCatId()) );
-            }catch (Exception e){
+        try {
+            Integer carId = Integer.valueOf(carTM.getId());
+            CarDto carDto = getCar(carId);
+            carIdText.setText(carTM.getId());
+            carNumberText.setText(carDto.getNumber());
+            carBrandText.setText(carDto.getBrand());
+            carModelText.setText(carDto.getModel());
+            yearText.setText(String.valueOf(carDto.getYear()));
+            rateText.setText(String.valueOf(carDto.getRate()));
+            catIdText.setText(String.valueOf(carDto.getCatId()));
+        } catch (Exception e) {
 
-            }
+        }
 
     }
 

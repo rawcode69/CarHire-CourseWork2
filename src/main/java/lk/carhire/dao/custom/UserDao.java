@@ -6,4 +6,5 @@ import lk.carhire.entity.UserEntity;
 
 public interface UserDao extends CrudDao<UserEntity,Integer> {
 
+    UserEntity getUserByUserName(String userName);
 }

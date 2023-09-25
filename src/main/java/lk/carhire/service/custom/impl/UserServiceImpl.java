@@ -93,5 +93,23 @@ public class UserServiceImpl implements UserService {
         return userDtos;
     }
 
+    @Override
+    public UserDto getUserByUserName(String userName) throws Exception {
+
+        UserEntity userEntity = userDao.getUserByUserName(userName);
+
+        UserDto userDto = new UserDto();
+
+        userDto.setUserName(userEntity.getUserName());
+        userDto.setPassWord(userEntity.getPassword());
+        userDto.setId(userEntity.getId());
+        userDto.setFirstName(userEntity.getFullName().getFirstName());
+        userDto.setLastName(userEntity.getFullName().getLastName());
+        userDto.setRole(userEntity.getRole());
+
+        return userDto;
+
+    }
+
 
 }

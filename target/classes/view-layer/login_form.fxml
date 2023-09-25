@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="579.0" prefWidth="514.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.carhire.view.controller.LoginFormController">
    <children>
       <ImageView fitHeight="152.0" fitWidth="304.0" layoutX="105.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
@@ -16,20 +15,20 @@
             <Image url="@../Images/logo.png" />
          </image>
       </ImageView>
-      <TextField layoutX="157.0" layoutY="199.0" prefHeight="26.0" prefWidth="248.0" promptText="UserName" />
-      <TextField layoutX="159.0" layoutY="252.0" prefHeight="26.0" prefWidth="248.0" promptText="Password" />
-      <Button layoutX="110.0" layoutY="325.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="318.0" style="-fx-background-color: #bdc3c7;" text="Login" />
+      <TextField fx:id="userNameText" layoutX="147.0" layoutY="199.0" prefHeight="26.0" prefWidth="248.0" promptText="UserName" />
+      <TextField fx:id="passwordText" layoutX="149.0" layoutY="252.0" prefHeight="26.0" prefWidth="248.0" promptText="Password" />
+      <Button fx:id="loginButton" layoutX="101.0" layoutY="325.0" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="42.0" prefWidth="318.0" style="-fx-background-color: #bdc3c7;" text="Login" />
       <Label alignment="CENTER" layoutX="105.0" layoutY="136.0" prefHeight="36.0" prefWidth="304.0" text="User Login">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <ImageView fitHeight="26.0" fitWidth="24.0" layoutX="122.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="26.0" fitWidth="24.0" layoutX="112.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/customer.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="26.0" fitWidth="24.0" layoutX="122.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="26.0" fitWidth="24.0" layoutX="112.0" layoutY="253.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/lock.png" />
          </image>

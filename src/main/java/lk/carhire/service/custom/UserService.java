@@ -15,4 +15,6 @@ public interface UserService extends SuperService {
     void deleteUser(UserDto userDto) throws Exception;
 
     List<UserDto> getAllUsers() throws Exception;
+
+    UserDto getUserByUserName(String userName) throws Exception;
 }

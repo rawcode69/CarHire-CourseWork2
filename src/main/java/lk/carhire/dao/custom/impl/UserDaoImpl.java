@@ -13,6 +13,7 @@ import java.util.List;
 
 public class UserDaoImpl implements UserDao {
     Session session = SessionFactoryConfiguration.getInstance().getSession();
+
     @Override
     public Integer add(UserEntity userEntity) throws Exception {
 
@@ -21,7 +22,7 @@ public class UserDaoImpl implements UserDao {
             Integer id = (Integer) session.save(userEntity);
             transaction.commit();
             return id;
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             throw e;
         }
@@ -35,7 +36,7 @@ public class UserDaoImpl implements UserDao {
         try {
             session.update(userEntity);
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             throw e;
         }
@@ -49,7 +50,7 @@ public class UserDaoImpl implements UserDao {
         try {
             session.delete(userEntity);
             transaction.commit();
-        }catch (Exception e){
+        } catch (Exception e) {
             transaction.rollback();
             throw e;
         }
@@ -58,7 +59,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public UserEntity get(Integer id) throws Exception {
         Session session = SessionFactoryConfiguration.getInstance().getSession();
-        UserEntity userEntity = session.get(UserEntity.class,id);
+        UserEntity userEntity = session.get(UserEntity.class, id);
         session.close();
         return userEntity;
     }
@@ -67,7 +68,18 @@ public class UserDaoImpl implements UserDao {
     public List<UserEntity> getAll() throws Exception {
         String hql = "FROM UserEntity";
         Query query = session.createQuery(hql);
-        List <UserEntity> userEntities = query.list();
+        List<UserEntity> userEntities = query.list();
         return userEntities;
+    }
+
+    @Override
+    public UserEntity getUserByUserName(String userName) {
+
+        String hql = "FROM UserEntity user WHERE user.userName = :UserName";
+
+        UserEntity userEntity = session.createQuery(hql, UserEntity.class).
+                setParameter("UserName", userName).uniqueResult();
+
+        return userEntity;
     }
 }

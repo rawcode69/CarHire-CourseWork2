@@ -39,9 +39,9 @@ public class UserFormController {
     private void setTableData(List<UserDto> userDtos) {
         ObservableList<UserTM> oblist = FXCollections.observableArrayList();
 
-        for(UserDto userDto :userDtos){
+        for (UserDto userDto : userDtos) {
 
-            String fullName = userDto.getFirstName() +" "+ userDto.getLastName();
+            String fullName = userDto.getFirstName() + " " + userDto.getLastName();
             UserTM userTM = new UserTM();
 
             userTM.setId(String.valueOf(userDto.getId()));
@@ -61,7 +61,7 @@ public class UserFormController {
     }
 
     private List<UserDto> getAllUsers() throws Exception {
-        List <UserDto> userDtos = userController.getAllUsers();
+        List<UserDto> userDtos = userController.getAllUsers();
         return userDtos;
     }
 
@@ -71,21 +71,27 @@ public class UserFormController {
 
     private void saveUser() {
 
-        UserDto userDto = new UserDto();
-        userDto.setFirstName(firstNameText.getText());
-        userDto.setLastName(lastNameText.getText());
-        userDto.setUserName(userNameText.getText());
-        userDto.setPassWord(passwordText.getText());
-        userDto.setRole(roleText.getText());
-        try {
-            Integer id = userController.saveUser(userDto);
-            new Alert(Alert.AlertType.CONFIRMATION, "User Saved Successfully").show();
-            clearForm();
-            loadTable();
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
+        if (firstNameText.getText() == "" || lastNameText.getText() == "" || userNameText.getText() == ""
+                || passwordText.getText() == "" || roleText.getText() == "") {
 
+            new Alert(Alert.AlertType.ERROR, "Any field Cannot be empty").show();
+
+        } else {
+            UserDto userDto = new UserDto();
+            userDto.setFirstName(firstNameText.getText());
+            userDto.setLastName(lastNameText.getText());
+            userDto.setUserName(userNameText.getText());
+            userDto.setPassWord(passwordText.getText());
+            userDto.setRole(roleText.getText());
+            try {
+                Integer id = userController.saveUser(userDto);
+                new Alert(Alert.AlertType.CONFIRMATION, "User Saved Successfully").show();
+                clearForm();
+                loadTable();
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
+        }
     }
 
     private void clearForm() {
@@ -99,27 +105,34 @@ public class UserFormController {
 
     public void updateButtonAction(ActionEvent actionEvent) {
 
-        UserDto userDto = new UserDto();
+        if (firstNameText.getText() == "" || lastNameText.getText() == "" || userNameText.getText() == ""
+                || passwordText.getText() == "" || roleText.getText() == "") {
 
-        userDto.setId(Integer.valueOf(idText.getText()));
-        userDto.setFirstName(firstNameText.getText());
-        userDto.setLastName(lastNameText.getText());
-        userDto.setUserName(userNameText.getText());
-        userDto.setPassWord(passwordText.getText());
-        userDto.setRole(roleText.getText());
+            new Alert(Alert.AlertType.ERROR, "Any Field Cannot be Empty").show();
+        } else {
 
-        try {
-            userController.updateUser(userDto);
-            new Alert(Alert.AlertType.CONFIRMATION, "User Saved Successfully").show();
-            clearForm();
-            loadTable();
-        } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+
+            UserDto userDto = new UserDto();
+
+            userDto.setId(Integer.valueOf(idText.getText()));
+            userDto.setFirstName(firstNameText.getText());
+            userDto.setLastName(lastNameText.getText());
+            userDto.setUserName(userNameText.getText());
+            userDto.setPassWord(passwordText.getText());
+            userDto.setRole(roleText.getText());
+
+            try {
+                userController.updateUser(userDto);
+                new Alert(Alert.AlertType.CONFIRMATION, "User Saved Successfully").show();
+                clearForm();
+                loadTable();
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
         }
-
     }
 
-    public  void getUser() throws Exception {
+    public void getUser() throws Exception {
 
         Integer id = Integer.valueOf(idText.getText());
         UserDto userDto = userController.getUser(id);
@@ -162,16 +175,17 @@ public class UserFormController {
 
         try {
             userController.deleteUser(userDto);
-            new Alert(Alert.AlertType.CONFIRMATION,"User Deleted Successfully").show();
+            new Alert(Alert.AlertType.CONFIRMATION, "User Deleted Successfully").show();
             clearForm();
             loadTable();
-        }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
 
     }
+
     private void loadTable() throws Exception {
-        List <UserDto> userDtos = getAllUsers();
+        List<UserDto> userDtos = getAllUsers();
         setCellValueFactory();
         setTableData(userDtos);
     }
@@ -186,7 +200,8 @@ public class UserFormController {
     public void clearButtonAction(ActionEvent actionEvent) {
         clearForm();
     }
-    private void tableListener(){
+
+    private void tableListener() {
         userTable.getSelectionModel().selectedItemProperty().
                 addListener((observable, oldValue, newValue) -> {
                     setData((UserTM) newValue);
@@ -196,7 +211,7 @@ public class UserFormController {
     private void setData(UserTM userTM) {
 
         try {
-            Integer id = Integer.valueOf(userTM.getId()) ;
+            Integer id = Integer.valueOf(userTM.getId());
             UserDto userDto = getUser(id);
 
             idText.setText(String.valueOf(id));
@@ -206,7 +221,7 @@ public class UserFormController {
             userNameText.setText(userDto.getUserName());
             passwordText.setText(userDto.getPassWord());
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }

@@ -19,7 +19,7 @@ public class CarEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "number",length = 7,nullable = false, unique = true)
+    @Column(name = "number",length = 10,nullable = false, unique = true)
     private String number;
 
     @Column(name = "brand",length = 20,nullable = false)

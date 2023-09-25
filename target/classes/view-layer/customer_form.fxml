@@ -16,53 +16,53 @@
       <Label layoutX="14.0" layoutY="18.0" prefHeight="20.0" prefWidth="82.0" text="Customer Id :" />
       <TextField fx:id="custIdText" layoutX="101.0" layoutY="15.0" onAction="#custIdTextAction" prefHeight="10.0" prefWidth="62.0" />
       <Label layoutX="14.0" layoutY="50.0" prefHeight="20.0" prefWidth="99.0" text="User Name : " />
-      <TextField fx:id="userNameText" layoutX="102.0" layoutY="47.0" prefHeight="26.0" prefWidth="141.0" />
-      <Button fx:id="searchButton" layoutX="168.0" layoutY="16.0" mnemonicParsing="false" onAction="#searchButtonAction" prefHeight="26.0" prefWidth="73.0" text="Search" />
+      <TextField fx:id="userNameText" layoutX="102.0" layoutY="47.0" prefHeight="26.0" prefWidth="127.0" />
+      <Button fx:id="searchButton" layoutX="168.0" layoutY="16.0" mnemonicParsing="false" onAction="#searchButtonAction" prefHeight="26.0" prefWidth="62.0" text="Search" />
       <Label layoutX="12.0" layoutY="97.0" prefHeight="20.0" prefWidth="74.0" text="First Name :" />
-      <TextField fx:id="firstNameText" layoutX="89.0" layoutY="94.0" prefHeight="26.0" prefWidth="154.0" />
+      <TextField fx:id="firstNameText" layoutX="89.0" layoutY="94.0" prefHeight="26.0" prefWidth="138.0" />
       <Label layoutX="12.0" layoutY="127.0" prefHeight="20.0" prefWidth="74.0" text="Last  Name :" />
-      <TextField fx:id="lastNameText" layoutX="89.0" layoutY="124.0" prefHeight="26.0" prefWidth="154.0" />
+      <TextField fx:id="lastNameText" layoutX="89.0" layoutY="124.0" prefHeight="26.0" prefWidth="138.0" />
       <Label layoutX="14.0" layoutY="182.0" prefHeight="20.0" prefWidth="74.0" text="Street :" />
-      <TextField fx:id="streetText" layoutX="125.0" layoutY="179.0" prefHeight="10.0" prefWidth="118.0" />
+      <TextField fx:id="streetText" layoutX="125.0" layoutY="179.0" prefHeight="26.0" prefWidth="99.0" />
       <Label layoutX="14.0" layoutY="212.0" prefHeight="20.0" prefWidth="74.0" text="City:" />
-      <TextField fx:id="cityText" layoutX="125.0" layoutY="210.0" prefHeight="10.0" prefWidth="118.0" />
-      <Button fx:id="deleteButton" alignment="BASELINE_LEFT" layoutX="176.0" layoutY="398.0" mnemonicParsing="false" onAction="#deleteButtonAction" prefHeight="35.0" prefWidth="74.0" text="Delete">
+      <TextField fx:id="cityText" layoutX="125.0" layoutY="210.0" prefHeight="26.0" prefWidth="99.0" />
+      <Button fx:id="deleteButton" alignment="BASELINE_LEFT" layoutX="148.0" layoutY="398.0" mnemonicParsing="false" onAction="#deleteButtonAction" prefHeight="26.0" prefWidth="74.0" text="Delete">
          <graphic>
-            <ImageView fitHeight="20.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="14.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/delete.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <TableView fx:id="custTable" layoutX="254.0" layoutY="15.0" prefHeight="418.0" prefWidth="536.0">
+      <TableView fx:id="custTable" layoutX="232.0" layoutY="15.0" prefHeight="418.0" prefWidth="558.0">
         <columns>
-          <TableColumn fx:id="clmCustId" prefWidth="92.79998779296875" text="Customer Id" />
-          <TableColumn fx:id="clmcustName" prefWidth="87.20001220703125" text=" Name" />
-            <TableColumn fx:id="clmCustAddress" prefWidth="92.79998779296875" text="Address" />
-            <TableColumn fx:id="clmCustMobile" prefWidth="158.39990234375" text="Mobile" />
-            <TableColumn fx:id="clmCustAddress1" prefWidth="106.4000244140625" text="Overdue Rent" />
+          <TableColumn fx:id="clmCustId" prefWidth="37.5999755859375" text=" Id" />
+          <TableColumn fx:id="clmcustName" prefWidth="90.4000244140625" text=" Name" />
+            <TableColumn fx:id="clmCustAddress" prefWidth="231.20001220703125" text="Address" />
+            <TableColumn fx:id="clmCustMobile" prefWidth="100.7999267578125" text="Mobile" />
+            <TableColumn fx:id="clmCustAddress1" prefWidth="95.99997558593748" text="Overdue Rent" />
         </columns>
       </TableView>
-      <Separator layoutX="8.0" layoutY="78.0" prefHeight="3.0" prefWidth="238.0" />
+      <Separator layoutX="8.0" layoutY="78.0" prefHeight="3.0" prefWidth="218.0" />
       <Label layoutX="13.0" layoutY="76.0" prefHeight="26.0" prefWidth="74.0" text="Name">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Separator layoutX="7.0" layoutY="157.0" prefHeight="3.0" prefWidth="238.0" />
-      <Button fx:id="updateButton" alignment="BASELINE_LEFT" layoutX="87.0" layoutY="398.0" mnemonicParsing="false" onAction="#updateButtonAction" prefHeight="35.0" prefWidth="82.0" text="Update">
+      <Separator layoutX="7.0" layoutY="157.0" prefHeight="3.0" prefWidth="218.0" />
+      <Button fx:id="updateButton" alignment="BASELINE_LEFT" layoutX="70.0" layoutY="398.0" mnemonicParsing="false" onAction="#updateButtonAction" prefHeight="26.0" prefWidth="74.0" text="Update">
          <graphic>
-            <ImageView fitHeight="20.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="17.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/update.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="saveButton" alignment="BASELINE_LEFT" layoutX="6.0" layoutY="398.0" mnemonicParsing="false" onAction="#saveButtonOnAction" prefHeight="35.0" prefWidth="74.0" text="Save">
+      <Button fx:id="saveButton" alignment="BASELINE_LEFT" layoutX="4.0" layoutY="398.0" mnemonicParsing="false" onAction="#saveButtonOnAction" prefHeight="26.0" prefWidth="62.0" text="Save">
          <graphic>
-            <ImageView fitHeight="20.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="12.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/save.png" />
                </image>
@@ -75,18 +75,18 @@
          </font>
       </Label>
       <Label layoutX="13.0" layoutY="245.0" prefHeight="20.0" prefWidth="74.0" text="District :" />
-      <TextField fx:id="districtText" layoutX="125.0" layoutY="242.0" prefHeight="10.0" prefWidth="118.0" />
+      <TextField fx:id="districtText" layoutX="125.0" layoutY="242.0" prefHeight="26.0" prefWidth="99.0" />
       <Label layoutX="13.0" layoutY="277.0" prefHeight="20.0" prefWidth="74.0" text="Postal Code:" />
-      <TextField fx:id="postalCodeText" layoutX="125.0" layoutY="274.0" prefHeight="10.0" prefWidth="118.0" />
-      <Separator layoutX="8.0" layoutY="305.0" prefHeight="3.0" prefWidth="238.0" />
+      <TextField fx:id="postalCodeText" layoutX="125.0" layoutY="274.0" prefHeight="26.0" prefWidth="99.0" />
+      <Separator layoutX="8.0" layoutY="305.0" prefHeight="3.0" prefWidth="218.0" />
       <Label layoutX="12.0" layoutY="310.0" prefHeight="18.0" prefWidth="62.0" text="Contact">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
       <Label layoutX="13.0" layoutY="330.0" prefHeight="20.0" prefWidth="74.0" text="E - Mail :" />
-      <TextField fx:id="emailText" layoutX="124.0" layoutY="327.0" prefHeight="10.0" prefWidth="118.0" />
+      <TextField fx:id="emailText" layoutX="124.0" layoutY="327.0" prefHeight="26.0" prefWidth="99.0" />
       <Label layoutX="13.0" layoutY="361.0" prefHeight="20.0" prefWidth="74.0" text="Mobile :" />
-      <TextField fx:id="mobileText" layoutX="124.0" layoutY="358.0" prefHeight="10.0" prefWidth="118.0" />
+      <TextField fx:id="mobileText" layoutX="124.0" layoutY="358.0" prefHeight="26.0" prefWidth="99.0" />
    </children>
 </AnchorPane>

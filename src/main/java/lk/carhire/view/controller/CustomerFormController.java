@@ -40,10 +40,9 @@ public class CustomerFormController {
     CustomerController customerController;
 
 
-
-    public void initialize(){
+    public void initialize() {
         customerController = new CustomerController();
-       // System.out.println("Customer Form Initialized");
+        // System.out.println("Customer Form Initialized");
         loadTables();
         tableListener();
     }
@@ -51,18 +50,18 @@ public class CustomerFormController {
     private void setTableData(List<CustomerDto> customerDtos) {
         ObservableList<CustomerTM> oblist = FXCollections.observableArrayList();
 
-        for(CustomerDto customerDto : customerDtos){
-           String name = customerDto.getFirstName()+" "+customerDto.getLastName();
-           String address = customerDto.getStreet()+", "+customerDto.getCity()+", "+customerDto.getDistrict();
+        for (CustomerDto customerDto : customerDtos) {
+            String name = customerDto.getFirstName() + " " + customerDto.getLastName();
+            String address = customerDto.getStreet() + ", " + customerDto.getCity() + ", " + customerDto.getDistrict();
 
-           CustomerTM customerTM = new CustomerTM(
-                   String.valueOf(customerDto.getId())
-                   ,name
-                   ,address
-                   ,customerDto.getMobile());
-           oblist.add(customerTM);
+            CustomerTM customerTM = new CustomerTM(
+                    String.valueOf(customerDto.getId())
+                    , name
+                    , address
+                    , customerDto.getMobile());
+            oblist.add(customerTM);
         }
-            custTable.setItems(oblist);
+        custTable.setItems(oblist);
 
     }
 
@@ -75,9 +74,9 @@ public class CustomerFormController {
 
     private List<CustomerDto> getAllCustomers() {
         try {
-           return customerController.getAllCustomer();
-        }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR,"Customers Not Loaded"+e.getMessage()).show();
+            return customerController.getAllCustomer();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Customers Not Loaded" + e.getMessage()).show();
             return null;
         }
     }
@@ -113,45 +112,61 @@ public class CustomerFormController {
 
         try {
             customerController.deleteCustomer(customerDto);
-            new Alert(Alert.AlertType.CONFIRMATION,"Customer Deleted").show();
+            new Alert(Alert.AlertType.CONFIRMATION, "Customer Deleted").show();
             loadTables();
             clearForm();
-        }catch (Exception e){
+        } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
 
     }
 
     private void saveCustomer() {
-        CustomerDto customerDto = new CustomerDto(
-                userNameText.getText(),
-                emailText.getText(),
-                firstNameText.getText(),
-                lastNameText.getText(),
-                streetText.getText(),
-                cityText.getText(),
-                districtText.getText(),
-                postalCodeText.getText(),
-                mobileText.getText());
-        try {
-            Integer id = customerController.saveCustomer(customerDto);
-            new Alert(Alert.AlertType.CONFIRMATION,"Customer Saved Successfully").show();
-            loadTables();
-            clearForm();
-        }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        }
 
+        if (userNameText.getText() == "" || emailText.getText() == "" || firstNameText.getText() == "" || lastNameText.getText() == ""
+                || streetText.getText() == "" || cityText.getText() == "" || districtText.getText() == ""
+                || postalCodeText.getText() == "" || mobileText.getText() == "") {
+
+            new Alert(Alert.AlertType.ERROR, "Any Field Cannot be Empty").show();
+        } else {
+
+            try {
+
+                CustomerDto customerDto = new CustomerDto(
+                        userNameText.getText(),
+                        emailText.getText(),
+                        firstNameText.getText(),
+                        lastNameText.getText(),
+                        streetText.getText(),
+                        cityText.getText(),
+                        districtText.getText(),
+                        postalCodeText.getText(),
+                        mobileText.getText());
+
+                try {
+                   customerDto.getMobile();
+                }catch (NumberFormatException numberFormatException){
+                    new Alert(Alert.AlertType.ERROR, "Mobile Should be a Number").show();
+                }
+
+                Integer id = customerController.saveCustomer(customerDto);
+                new Alert(Alert.AlertType.CONFIRMATION, "Customer Saved Successfully").show();
+                loadTables();
+                clearForm();
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
+        }
     }
 
-    private void getCustomer(){
+    private void getCustomer() {
 
         Integer id = Integer.valueOf(custIdText.getText());
 
         try {
-           CustomerDto customer =  customerController.getCustomer(id);
-           setForm(customer);
-        }catch (Exception e){
+            CustomerDto customer = customerController.getCustomer(id);
+            setForm(customer);
+        } catch (Exception e) {
 
         }
     }
@@ -160,7 +175,7 @@ public class CustomerFormController {
         try {
             CustomerDto customerDto = customerController.getCustomer(id);
             return customerDto;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
     }
@@ -181,10 +196,18 @@ public class CustomerFormController {
 
     public void updateButtonAction(ActionEvent actionEvent) {
 
-         updateCustomer();
+        updateCustomer();
     }
 
-    private void updateCustomer(){
+    private void updateCustomer() {
+
+        if (userNameText.getText() == "" || emailText.getText() == "" || firstNameText.getText() == "" || lastNameText.getText() == ""
+                || streetText.getText() == "" || cityText.getText() == "" || districtText.getText() == ""
+                || postalCodeText.getText() == "" || mobileText.getText() == "") {
+
+            new Alert(Alert.AlertType.ERROR, "Any Field Cannot be Empty").show();
+        } else {
+
         CustomerDto customerDto = new CustomerDto();
 
         customerDto.setId(Integer.valueOf(custIdText.getText()));
@@ -203,12 +226,13 @@ public class CustomerFormController {
             new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated").show();
             loadTables();
             clearForm();
-        }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
+    }
 
-    private void clearForm(){
+    private void clearForm() {
         custIdText.setText("");
         userNameText.setText("");
         firstNameText.setText("");
@@ -221,25 +245,24 @@ public class CustomerFormController {
         postalCodeText.setText("");
     }
 
-
     public void custIdTextAction(ActionEvent actionEvent) {
         Integer id = Integer.valueOf(custIdText.getText());
 
         try {
-            CustomerDto customer =  customerController.getCustomer(id);
+            CustomerDto customer = customerController.getCustomer(id);
             setForm(customer);
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
 
-    private void loadTables(){
+    private void loadTables() {
         setCellValueFactory();
         List<CustomerDto> customerDtos = getAllCustomers();
         setTableData(customerDtos);
     }
 
-    private void tableListener(){
+    private void tableListener() {
         custTable.getSelectionModel().selectedItemProperty().
                 addListener((observable, oldValue, newValue) -> {
                     try {
@@ -256,7 +279,7 @@ public class CustomerFormController {
         try {
             Integer id = Integer.valueOf(customerTM.getId());
             CustomerDto customerDto = getCustomer(id);
-            custIdText.setText(String.valueOf(id) );
+            custIdText.setText(String.valueOf(id));
             userNameText.setText(customerDto.getUserName());
             firstNameText.setText(customerDto.getFirstName());
             lastNameText.setText(customerDto.getLastName());
@@ -266,7 +289,7 @@ public class CustomerFormController {
             postalCodeText.setText(customerDto.getPostalCode());
             emailText.setText(customerDto.getEmail());
             mobileText.setText(customerDto.getMobile());
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
