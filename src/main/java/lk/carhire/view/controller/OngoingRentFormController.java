@@ -55,9 +55,8 @@ public class OngoingRentFormController {
         customerController = new CustomerController();
         carController = new CarController();
         currentDate();
-        List<RentDto> rentDtos = loadAllActiveRents();
-        setCellValueFactory();
-        setTableValues(rentDtos);
+        loadTable();
+
         tableListener();
     }
 
@@ -99,7 +98,7 @@ public class OngoingRentFormController {
         }
 
         rentTable.setItems(obList);
-        
+
     }
 
     private void setCellValueFactory() {
@@ -133,29 +132,30 @@ public class OngoingRentFormController {
 
     private void closeRent() throws Exception {
 
-    Integer rentId = Integer.valueOf(rentIdText.getText());
+        Integer rentId = Integer.valueOf(rentIdText.getText());
 
-    Double balanceToPay = Double.valueOf(balanceToPayText.getText());
-    RentDto rentDto = rentController.getRent(rentId);
-    Integer custId = rentDto.getCustomerId();
-    CarDto carDto = carController.getCarByCarNumber(carNumberText.getText());
+        Double balanceToPay = Double.valueOf(balanceToPayText.getText());
+        RentDto rentDto = rentController.getRent(rentId);
+        Integer custId = rentDto.getCustomerId();
+        CarDto carDto = carController.getCarByCarNumber(carNumberText.getText());
 
-    OngoingRentDto ongoingRentDto = new OngoingRentDto();
+        OngoingRentDto ongoingRentDto = new OngoingRentDto();
 
-    ongoingRentDto.setBalanceToPay(balanceToPay);
-    ongoingRentDto.setCustId(custId);
-    ongoingRentDto.setCarId(carDto.getId());
-    ongoingRentDto.setRentId(rentId);
+        ongoingRentDto.setBalanceToPay(balanceToPay);
+        ongoingRentDto.setCustId(custId);
+        ongoingRentDto.setCarId(carDto.getId());
+        ongoingRentDto.setRentId(rentId);
 
 
-    try {
-        String resp =  rentController.closeRent(ongoingRentDto);
-        new Alert(Alert.AlertType.INFORMATION,resp).show();
-    }catch (Exception e){
-        new Alert(Alert.AlertType.ERROR,e.getMessage()).show();
-        System.out.println(e);
-    }
-
+        try {
+            String resp = rentController.closeRent(ongoingRentDto);
+            clearForm();
+            loadTable();
+            new Alert(Alert.AlertType.INFORMATION, resp).show();
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            System.out.println(e);
+        }
 
     }
 
@@ -166,7 +166,7 @@ public class OngoingRentFormController {
 
     }
 
-    private void tableListener(){
+    private void tableListener() {
         rentTable.getSelectionModel().selectedItemProperty().
                 addListener((observable, oldValue, newValue) -> {
                     try {
@@ -188,8 +188,25 @@ public class OngoingRentFormController {
             overDueText.setText(ongoingRentTM.getOverdue());
             balanceToPayText.setText(ongoingRentTM.getBalanceToPay());
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
+    }
+
+    private void clearForm() {
+        rentIdText.setText("");
+        custNameText.setText("");
+        carNumberText.setText("");
+        rentDateText.setText("");
+        returnDateText.setText("");
+        overDueText.setText("");
+        balanceToPayText.setText("");
+
+    }
+
+    private void loadTable() throws Exception {
+        setCellValueFactory();
+        List<RentDto> rentDtos = loadAllActiveRents();
+        setTableValues(rentDtos);
     }
 }
